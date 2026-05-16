@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Brand Tokens ──────────────────────────────────────────── */
+:root {
+  --matte-black:  #0F1113;
+  --graphite:     #23272B;
+  --off-white:    #F3F2EE;
+  --slate:        #5C6670;
+  --gunmetal:     #3A4047;
+  --olive:        #4E5B4C;
+
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-body:    var(--font-inter), sans-serif;
+  --font-mono:    var(--font-dm-mono), monospace;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--matte-black);
+  color: var(--off-white);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* ── Typography Helpers ────────────────────────────────────── */
+.t-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.0;
+  color: var(--off-white);
+}
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--off-white);
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--off-white);
+}
+
+.t-h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--off-white);
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.65;
+  color: var(--slate);
+}
+
+.t-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--slate);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--off-white);
+}
+
+.t-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--olive);
+  text-transform: uppercase;
+}
+
+/* ── Layout Utilities ──────────────────────────────────────── */
+.section-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--olive);
+  margin-bottom: 48px;
+}
+
+.thin-rule {
+  height: 1px;
+  background: var(--gunmetal);
+  border: none;
+}
+
+/* ── Form Elements ─────────────────────────────────────────── */
+.form-field {
+  @apply w-full bg-graphite border border-gunmetal text-off-white placeholder-slate/50
+    px-4 py-3 text-sm font-body focus:outline-none focus:border-olive
+    transition-colors duration-150;
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+
+.form-error {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #C0392B;
+  margin-top: 4px;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--off-white);
+  color: var(--matte-black);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 2px;
+  border: 1px solid var(--off-white);
+  transition: background-color 150ms, color 150ms;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #E5E4E0;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--slate);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 2px;
+  border: 1px solid var(--gunmetal);
+  transition: border-color 150ms, color 150ms;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: var(--slate);
+  color: var(--off-white);
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.data-card {
+  border: 1px solid var(--gunmetal);
+  padding: 28px 32px;
+  background: var(--graphite);
+  border-radius: 2px;
+}
+
+/* ── Nav ───────────────────────────────────────────────────── */
+.nav-link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--slate);
+  transition: color 150ms;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--off-white);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--matte-black); }
+::-webkit-scrollbar-thumb { background: var(--gunmetal); }
