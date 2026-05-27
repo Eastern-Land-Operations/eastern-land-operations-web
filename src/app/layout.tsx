@@ -40,6 +40,14 @@ export const metadata: Metadata = {
     'tactical acquisitions',
   ],
   authors: [{ name: 'Eastern Land Operations' }],
+  icons: {
+    icon: [
+      { url: '/brand/elo-favicon.svg', type: 'image/svg+xml' },
+      { url: '/brand/elo-logo-black.png', sizes: '32x32', type: 'image/png' },
+    ],
+    shortcut: ['/brand/elo-favicon.svg'],
+    apple: [{ url: '/brand/elo-logo-black.png' }],
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -47,6 +55,14 @@ export const metadata: Metadata = {
     siteName: 'Eastern Land Operations',
     title: 'Eastern Land Operations',
     description: 'Strategic land operator with institutional discipline.',
+    images: [
+      {
+        url: '/brand/elo-logo-black.png',
+        width: 1200,
+        height: 742,
+        alt: 'Eastern Land Operations brand mark',
+      },
+    ],
   },
   robots: {
     index: true,

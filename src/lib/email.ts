@@ -1,4 +1,5 @@
 import { Resend } from 'resend'
+import type { OutreachSubmission } from '@/lib/outreachSchemas'
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'contact@easternlandoperations.com'
 const FROM_EMAIL = process.env.FROM_EMAIL || 'onboarding@resend.dev'
@@ -9,76 +10,38 @@ function getResend(): Resend {
   return new Resend(key)
 }
 
-export interface OutreachFormData {
-  submissionType: string
-  fullName: string
-  email: string
-  phone: string
-  preferredContact?: string
-  // Property fields
-  propertyAddress?: string
-  propertyCity?: string
-  propertyState?: string
-  propertyZip?: string
-  propertyType?: string
-  occupancyStatus?: string
-  condition?: string
-  knownRepairs?: string
-  codeViolations?: string
-  taxMortgageIssues?: string
-  isListed?: string
-  isUnderContract?: string
-  foreclosureDate?: string
-  desiredPrice?: string
-  timeline?: string
-  // Partner fields
-  companyName?: string
-  roleService?: string
-  marketsServed?: string
-  partnershipType?: string
-  websiteLink?: string
-  // Situation
-  reasonForReaching?: string
-  desiredOutcome?: string
-  urgentInfo?: string
-  // Source
-  referralSource?: string
-}
+export type OutreachFormData = OutreachSubmission
 
 function buildEmailSubject(data: OutreachFormData): string {
   const typeMap: Record<string, string> = {
-    'property-owner': 'New Property Submission',
+    'property-owner': 'New Seller Property Intake',
     'agent': 'New Agent Inquiry',
-    'wholesaler': 'New Wholesaler/Source Partner',
+    'wholesaler': 'New Wholesaler / Source Partner',
     'contractor': 'New Contractor Inquiry',
-    'lender': 'New Lender/Capital Partner Inquiry',
-    'investor': 'New Investor Inquiry',
-    'housing-partner': 'New Community/Housing Partner',
+    'lender': 'New Lender / Capital Partner Inquiry',
+    'investor': 'New Buyer / Investor Profile',
+    'housing-partner': 'New Community / Housing Partner',
     'other': 'New Outreach',
   }
 
   const prefix = typeMap[data.submissionType] || 'New Outreach'
 
-  if (
-    data.submissionType === 'property-owner' &&
-    data.propertyAddress &&
-    data.propertyCity
-  ) {
-    return `${prefix} — ${data.propertyAddress}, ${data.propertyCity}${data.propertyState ? ', ' + data.propertyState : ''}`
+  if (data.submissionType === 'property-owner' && data.propertyAddress) {
+    return `${prefix} - ${data.propertyAddress}`
   }
 
-  if (data.companyName) {
-    return `${prefix} — ${data.fullName} (${data.companyName})`
+  if ('companyName' in data && data.companyName) {
+    return `${prefix} - ${data.fullName} (${data.companyName})`
   }
 
-  return `${prefix} — ${data.fullName}`
+  return `${prefix} - ${data.fullName}`
 }
 
 function row(label: string, value: string | undefined): string {
   if (!value || value.trim() === '') return ''
   return `
     <tr>
-      <td style="padding: 8px 16px 8px 0; color: #A9B0B8; font-size: 13px; white-space: nowrap; vertical-align: top; width: 200px;">${label}</td>
+      <td style="padding: 8px 16px 8px 0; color: #A9B0B8; font-size: 13px; white-space: nowrap; vertical-align: top; width: 220px;">${label}</td>
       <td style="padding: 8px 0; color: #F4F4F2; font-size: 14px; vertical-align: top;">${value}</td>
     </tr>`
 }
@@ -99,12 +62,12 @@ function section(title: string, rows: string): string {
 
 function buildEmailHtml(data: OutreachFormData): string {
   const typeLabels: Record<string, string> = {
-    'property-owner': 'Property Owner',
+    'property-owner': 'Seller / Warm Lead Intake',
     'agent': 'Agent',
     'wholesaler': 'Wholesaler / Source Partner',
     'contractor': 'Contractor',
     'lender': 'Lender / Capital Partner',
-    'investor': 'Investor',
+    'investor': 'Buyer / Investor Buy Box',
     'housing-partner': 'Community / Housing Partner',
     'other': 'Other',
   }
@@ -116,51 +79,66 @@ function buildEmailHtml(data: OutreachFormData): string {
       row('Full Name', data.fullName),
       row('Email', data.email),
       row('Phone', data.phone),
-      row('Preferred Contact', data.preferredContact),
+      row('Preferred Contact', 'preferredContact' in data ? data.preferredContact : undefined),
     ].join('')
   )
 
-  const propertySection = section(
-    'Property Information',
-    [
-      row('Address', data.propertyAddress),
-      row('City', data.propertyCity),
-      row('State', data.propertyState),
-      row('ZIP', data.propertyZip),
-      row('Property Type', data.propertyType),
-      row('Occupancy Status', data.occupancyStatus),
-      row('Current Condition', data.condition),
-      row('Known Repairs', data.knownRepairs),
-      row('Code Violations', data.codeViolations),
-      row('Tax / Mortgage Issues', data.taxMortgageIssues),
-      row('Currently Listed', data.isListed),
-      row('Under Contract', data.isUnderContract),
-      row('Foreclosure / Sheriff Sale Date', data.foreclosureDate),
-      row('Desired Price', data.desiredPrice),
-      row('Timeline', data.timeline),
-    ].join('')
-  )
-
-  const partnerSection = section(
-    'Partner Information',
-    [
-      row('Company Name', data.companyName),
-      row('Role / Service', data.roleService),
-      row('Markets Served', data.marketsServed),
-      row('Partnership Type', data.partnershipType),
-      row('Website / Social', data.websiteLink),
-    ].join('')
-  )
-
-  const situationSection = section(
-    'Situation & Notes',
-    [
-      row('Reason for Reaching Out', data.reasonForReaching),
-      row('Desired Outcome', data.desiredOutcome),
-      row('Urgent Information', data.urgentInfo),
-      row('How did you hear about us?', data.referralSource),
-    ].join('')
-  )
+  const detailsSection =
+    data.submissionType === 'property-owner'
+      ? section(
+          'Property Intake',
+          [
+            row('Property Address', data.propertyAddress),
+            row('Do You Own The Property?', data.propertyOwnership),
+            row('Other Decision-Makers Involved', data.otherDecisionMakers),
+            row('Occupancy Status', data.occupancyStatus),
+            row('Property Type', data.propertyType),
+            row('Situation', data.situation),
+            row('Known Repairs Or Issues', data.knownRepairs),
+            row('Decision Timeline', data.timeline),
+            row('Desired Outcome', data.desiredOutcome),
+            row('Mortgages / Taxes / Liens / Violations', data.taxMortgageIssues),
+            row('Best Time To Contact', data.bestTimeToContact),
+            row('Additional Notes', data.notes),
+            row('Referral Source', data.referralSource),
+          ].join('')
+        )
+      : 'propertyTypesWanted' in data
+        ? section(
+            'Buyer / Investor Buy Box',
+            [
+              row('Company Name', 'companyName' in data ? data.companyName : undefined),
+              row('Buyer Type', data.fundingType),
+              row('Property Types Wanted', data.propertyTypesWanted.join(', ')),
+              row('Preferred Areas / Zip Codes', data.preferredAreas),
+              row('Typical Purchase Price Range', data.typicalPurchasePriceRange),
+              row('Maximum Purchase Price', data.maximumPurchasePrice),
+              row('Minimum Desired Profit / Return', data.minimumDesiredReturn),
+              row('Buyer Role', data.buyerRole),
+              row('Rehab Tolerance', data.rehabTolerance),
+              row('Close Speed', data.closeSpeed),
+              row('Purchases In Last 12 Months', data.purchasesLast12Months),
+              row('Proof Of Funds / Lender Letter', data.proofOfFundsAvailable),
+              row('Preferred Deal Alert Method', data.preferredDealAlertMethod),
+              row('VIP / First-Look Alerts', data.vipAlerts),
+              row('Notes', data.notes),
+              row('Referral Source', data.referralSource),
+            ].join('')
+          )
+        : section(
+            'Partner / Outreach Details',
+            [
+              row('Company Name', 'companyName' in data ? data.companyName : undefined),
+              row('Role / Service', 'roleService' in data ? data.roleService : undefined),
+              row('Markets Served', 'marketsServed' in data ? data.marketsServed : undefined),
+              row('Partnership Type', 'partnershipType' in data ? data.partnershipType : undefined),
+              row('Website / Social', 'websiteLink' in data ? data.websiteLink : undefined),
+              row('Reason For Reaching Out', 'reasonForReaching' in data ? data.reasonForReaching : undefined),
+              row('Desired Outcome', 'desiredOutcome' in data ? data.desiredOutcome : undefined),
+              row('Urgent Information', 'urgentInfo' in data ? data.urgentInfo : undefined),
+              row('Referral Source', data.referralSource),
+            ].join('')
+          )
 
   return `
 <!DOCTYPE html>
@@ -170,8 +148,7 @@ function buildEmailHtml(data: OutreachFormData): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body style="margin: 0; padding: 0; background-color: #0B0D0F; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-  <div style="max-width: 640px; margin: 0 auto; padding: 32px 16px;">
-    <!-- Header -->
+  <div style="max-width: 680px; margin: 0 auto; padding: 32px 16px;">
     <div style="border-bottom: 1px solid #3A4047; padding-bottom: 20px; margin-bottom: 28px;">
       <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #4E5B4C; margin-bottom: 6px;">
         Eastern Land Operations
@@ -180,19 +157,22 @@ function buildEmailHtml(data: OutreachFormData): string {
         ${buildEmailSubject(data)}
       </div>
       <div style="font-size: 12px; color: #A9B0B8; margin-top: 4px;">
-        Received ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+        Received ${new Date().toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        })}
       </div>
     </div>
 
-    <!-- Content -->
     <div>
       ${contactSection}
-      ${propertySection}
-      ${partnerSection}
-      ${situationSection}
+      ${detailsSection}
     </div>
 
-    <!-- Footer -->
     <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #232831; font-size: 11px; color: #A9B0B8; text-align: center;">
       This submission was sent from easternlandoperations.com
     </div>
@@ -216,14 +196,13 @@ export async function sendOutreachEmail(
     }
 
     if (attachments && attachments.length > 0) {
-      emailData.attachments = attachments.map((a) => ({
-        filename: a.filename,
-        content: a.content,
+      emailData.attachments = attachments.map((attachment) => ({
+        filename: attachment.filename,
+        content: attachment.content,
       }))
     }
 
     const { error } = await resend.emails.send(emailData)
-
     if (error) {
       console.error('Resend error:', error)
       return { success: false, error: error.message }

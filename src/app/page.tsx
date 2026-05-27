@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
+import BrandLogo from '@/components/BrandLogo'
 
 export const metadata: Metadata = {
   title: 'Eastern Land Operations | Strategic Land Operator',
@@ -79,7 +79,7 @@ export default function HomePage() {
                 Submit Property
               </Link>
               <Link href="/partner-with-us" className="btn-secondary">
-                Capital Inquiry
+                Buyer Network
               </Link>
             </div>
           </div>
@@ -89,13 +89,13 @@ export default function HomePage() {
             className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:block"
             aria-hidden="true"
           >
-            <Image
-              src="/brand/elo-logo-white.svg"
+            <BrandLogo
+              variant="light"
               alt=""
-              width={280}
-              height={180}
+              width={300}
+              height={186}
               priority
-              style={{ objectFit: 'contain', opacity: 0.12 }}
+              className="opacity-10"
             />
           </div>
         </div>
@@ -287,17 +287,17 @@ export default function HomePage() {
 
             {/* Capital */}
             <div className="border border-gunmetal p-10" style={{ borderRadius: '2px' }}>
-              <p className="t-eyebrow mb-6">Capital Partners</p>
-              <div className="section-rule" />
-              <h2 className="t-h2 text-xl mb-4">Deploy capital with discipline.</h2>
-              <p className="t-body mb-8">
-                Private lenders, equity partners, institutional capital. We present
-                underwritten opportunities with clear return profiles. No speculation.
-                No guesswork.
-              </p>
-              <Link href="/partner-with-us" className="btn-primary">
-                Capital Inquiry
-              </Link>
+            <p className="t-eyebrow mb-6">Buyers And Investors</p>
+            <div className="section-rule" />
+            <h2 className="t-h2 text-xl mb-4">Join the ELO buyer network.</h2>
+            <p className="t-body mb-8">
+                Tell us what you buy, where you buy, and how you move. We use your buy box to
+                route relevant opportunities to serious operators, landlords, developers, and
+                investor partners.
+            </p>
+            <Link href="/partner-with-us" className="btn-primary">
+                Buyer Intake
+            </Link>
             </div>
           </div>
 

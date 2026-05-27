@@ -143,6 +143,14 @@ body {
   margin-bottom: 6px;
 }
 
+.form-helper {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--slate);
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+
 .form-error {
   font-family: var(--font-body);
   font-size: 11px;

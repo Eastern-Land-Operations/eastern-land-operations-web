@@ -4,7 +4,7 @@ import SellerForm from '@/components/SellerForm'
 export const metadata: Metadata = {
   title: 'Sell Your Property',
   description:
-    'Submit your property to Eastern Land Operations. Any condition, any situation. We evaluate every submission and respond within one business day.',
+    'Seller and warm lead intake for Eastern Land Operations. Share your property details and goals, and we will follow up respectfully with possible next steps.',
 }
 
 const situations = [
@@ -19,66 +19,67 @@ const situations = [
   'Cleanout required',
   'Estate / probate',
   'Divorce settlement',
-  'As-is, fast close desired',
-]
+  'Just exploring options',
+] as const
 
 const process = [
   {
     id: '01',
-    step: 'Submit',
-    desc: 'Fill out the form with your property details and situation. The more context you provide, the faster we evaluate.',
+    step: 'Share the basics',
+    desc: 'Tell us about the property, the situation, and what would be most helpful for you.',
   },
   {
     id: '02',
     step: 'We review',
-    desc: 'Our team reviews every submission. We follow up within one business day to discuss and schedule a walkthrough if appropriate.',
+    desc: 'Our team looks at the details, the location, and the operational reality of the property.',
   },
   {
     id: '03',
-    step: 'We walk',
-    desc: 'We assess condition, value, and the full picture — title, liens, situation, your goals. No remote closings without field verification.',
+    step: 'We follow up',
+    desc: 'If we need clarification, we reach out respectfully and keep the conversation straightforward.',
   },
   {
     id: '04',
-    step: 'We present a path',
-    desc: 'A direct purchase, creative structure, or another option if it fits better. We present what makes sense for your situation, not just what works for ours.',
+    step: 'We outline options',
+    desc: 'A direct purchase, a flexible timeline, or another path if that fits the situation better.',
   },
   {
     id: '05',
     step: 'You decide',
-    desc: 'No pressure. No fees. No obligation. If our offer works for you, we move forward. If not, that\'s also fine.',
+    desc: 'No pressure. No obligation. You decide whether any next step makes sense for you.',
   },
   {
     id: '06',
-    step: 'We close',
-    desc: 'We coordinate everything — title, escrow, paperwork. You pick the closing date within reason and we execute.',
+    step: 'We execute cleanly',
+    desc: 'If there is a fit, we coordinate title, timing, and communication with a serious operator approach.',
   },
-]
+] as const
 
 export default function SellYourPropertyPage() {
   return (
     <>
-      {/* Hero */}
       <section className="pt-32 pb-24 bg-matte-black border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="max-w-2xl">
-            <p className="t-eyebrow mb-8">Property Owners</p>
+            <p className="t-eyebrow mb-8">Seller / Warm Lead Intake</p>
             <div className="section-rule" />
             <h1 className="t-h1 mb-8" style={{ fontSize: 'clamp(32px, 4vw, 52px)' }}>
-              Submit your property.
+              Tell us about
               <br />
-              Any condition.
+              your property.
               <br />
-              Any situation.
+              We&apos;ll review it
+              <br />
+              with care.
             </h1>
             <p className="t-body mb-8" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-              We evaluate properties directly from owners — as-is, no repairs required. We work
-              with your timeline, look at the full picture, and present the best path forward.
-              No obligation. No predatory tactics. No pressure to sign anything.
+              If you are considering a sale, working through a difficult property situation, or
+              just trying to understand your options, start here. We review each submission
+              seriously and follow up with a respectful, operator-grade response.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="#form" className="btn-primary">
-                Submit Your Property
+                Start Property Intake
               </a>
               <a href="tel:3026893912" className="btn-secondary">
                 Call 302-689-3912
@@ -88,15 +89,26 @@ export default function SellYourPropertyPage() {
         </div>
       </section>
 
-      {/* Key points */}
       <section className="bg-graphite py-16 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-gunmetal" style={{ borderRadius: '2px' }}>
             {[
-              { title: 'No repairs needed', desc: 'We purchase as-is. You do not need to fix, clean, or stage anything.' },
-              { title: 'No commissions', desc: 'Direct sale means no listing fees, no agent commissions, no hidden costs.' },
-              { title: 'Your timeline', desc: 'We can close fast when needed or work with an extended timeline. Your call.' },
-              { title: 'Creative structures', desc: 'If a standard sale does not fit, we evaluate other options — subject-to, installment, lease-option.' },
+              {
+                title: 'Respectful follow-up',
+                desc: 'We do not use aggressive cash-for-houses language or pressure tactics.',
+              },
+              {
+                title: 'Options-aware',
+                desc: 'The goal is not to force one outcome. It is to understand what fits your situation.',
+              },
+              {
+                title: 'Operator review',
+                desc: 'We assess the property, timeline, and execution realities before saying what we can do.',
+              },
+              {
+                title: 'Local context',
+                desc: 'We look at neighborhoods, condition, and ownership context through a local operating lens.',
+              },
             ].map((item, i) => (
               <div
                 key={item.title}
@@ -111,36 +123,35 @@ export default function SellYourPropertyPage() {
         </div>
       </section>
 
-      {/* Situations */}
       <section className="bg-matte-black py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="t-eyebrow mb-6">Situations We Handle</p>
+              <p className="t-eyebrow mb-6">Common Situations</p>
               <div className="section-rule" />
               <h2 className="t-h2 text-2xl mb-6">
-                Whatever the situation,
+                We understand that
                 <br />
-                describe it.
+                every property story is different.
               </h2>
               <p className="t-body" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-                Every situation is different. We have seen a lot. Whatever you are dealing with,
-                tell us about it — we will evaluate it honestly and tell you whether we can help
-                and how.
+                You do not need a polished story to reach out. If the property has problems, if
+                the title is messy, or if you are still deciding what you want, that context is
+                useful and welcome.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 border border-gunmetal" style={{ borderRadius: '2px' }}>
-              {situations.map((s, i) => (
+              {situations.map((situation, index) => (
                 <div
-                  key={s}
+                  key={situation}
                   className={`px-6 py-4 flex items-center gap-3 ${
-                    i % 2 === 0 ? 'border-r border-gunmetal' : ''
+                    index % 2 === 0 ? 'border-r border-gunmetal' : ''
                   } ${
-                    i < situations.length - 2 ? 'border-b border-gunmetal' : ''
+                    index < situations.length - 2 ? 'border-b border-gunmetal' : ''
                   }`}
                 >
-                  <span className="t-id text-xs flex-shrink-0">—</span>
-                  <span className="t-body text-sm">{s}</span>
+                  <span className="t-id text-xs flex-shrink-0">-</span>
+                  <span className="t-body text-sm">{situation}</span>
                 </div>
               ))}
             </div>
@@ -148,30 +159,27 @@ export default function SellYourPropertyPage() {
         </div>
       </section>
 
-      {/* Process */}
       <section className="bg-graphite py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
-          <p className="t-eyebrow mb-6">The Process</p>
+          <p className="t-eyebrow mb-6">How It Works</p>
           <div className="section-rule" />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-            <h2 className="t-h2 text-2xl">
-              Straightforward. No surprises.
-            </h2>
+            <h2 className="t-h2 text-2xl">A straightforward review process.</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 border border-gunmetal" style={{ borderRadius: '2px' }}>
-            {process.map((item, i) => (
+            {process.map((item, index) => (
               <div
                 key={item.id}
                 className={`p-8 ${
-                  [0,1,3,4].includes(i) ? 'border-b lg:border-b-0' : ''
+                  [0, 1, 3, 4].includes(index) ? 'border-b lg:border-b-0' : ''
                 } ${
-                  i % 3 !== 2 ? 'lg:border-r border-gunmetal' : ''
+                  index % 3 !== 2 ? 'lg:border-r border-gunmetal' : ''
                 } ${
-                  i < 3 ? 'lg:border-b border-gunmetal' : ''
+                  index < 3 ? 'lg:border-b border-gunmetal' : ''
                 } ${
-                  [0, 2].includes(i) ? 'sm:border-r border-gunmetal' : ''
+                  [0, 2].includes(index) ? 'sm:border-r border-gunmetal' : ''
                 } ${
-                  i < 4 ? 'sm:border-b border-gunmetal' : ''
+                  index < 4 ? 'sm:border-b border-gunmetal' : ''
                 }`}
               >
                 <p className="t-id mb-3">{item.id}</p>
@@ -183,17 +191,15 @@ export default function SellYourPropertyPage() {
         </div>
       </section>
 
-      {/* Form */}
       <section id="form" className="bg-matte-black py-24">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {/* Left: context */}
             <div>
-              <p className="t-eyebrow mb-6">Submit Your Property</p>
+              <p className="t-eyebrow mb-6">Tell Us About Your Property</p>
               <div className="section-rule" />
               <p className="t-body mb-8" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-                Fill out the form and our team will be in touch within one business day.
-                No commitment, no pressure — just an honest evaluation.
+                Use the form to share the facts, the pressure points, and your goals. The more
+                useful context you provide, the better our follow-up can be.
               </p>
               <div className="flex flex-col gap-4 border-t border-gunmetal pt-6">
                 <div>
@@ -211,7 +217,6 @@ export default function SellYourPropertyPage() {
               </div>
             </div>
 
-            {/* Form */}
             <div className="lg:col-span-2">
               <SellerForm />
             </div>

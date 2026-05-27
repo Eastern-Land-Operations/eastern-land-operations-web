@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import BrandLogo from '@/components/BrandLogo'
 
 const links = {
   company: [
@@ -9,7 +9,7 @@ const links = {
   ],
   engage: [
     { href: '/sell-your-property', label: 'Sell Your Property' },
-    { href: '/partner-with-us', label: 'Capital Inquiry' },
+    { href: '/partner-with-us', label: 'Buyer Network' },
     { href: '/contact', label: 'Contact' },
   ],
 }
@@ -22,13 +22,12 @@ export default function Footer() {
           {/* Brand col */}
           <div className="md:col-span-2">
             <div className="mb-6">
-              <Image
-                src="/brand/elo-logo-white.svg"
+              <BrandLogo
+                variant="light"
                 alt="Eastern Land Operations"
-                width={64}
-                height={40}
+                width={78}
+                height={48}
                 className="block mb-4"
-                style={{ objectFit: 'contain' }}
               />
               <p className="t-eyebrow mb-2">Eastern Land Operations</p>
             </div>

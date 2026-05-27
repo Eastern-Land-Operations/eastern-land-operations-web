@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import BrandLogo from '@/components/BrandLogo'
 
 const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/operations', label: 'Operations' },
   { href: '/acquisition-criteria', label: 'Acquisition Criteria' },
   { href: '/sell-your-property', label: 'Sell Property' },
-  { href: '/partner-with-us', label: 'Capital Inquiry' },
+  { href: '/partner-with-us', label: 'Buyer Network' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -41,14 +41,13 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Emblem */}
           <Link href="/" className="flex-shrink-0" aria-label="Eastern Land Operations">
-            <Image
-              src="/brand/elo-logo-white.svg"
-              alt="ELO"
-              width={48}
-              height={30}
+            <BrandLogo
+              variant="light"
+              alt="Eastern Land Operations"
+              width={70}
+              height={43}
               priority
               className="block"
-              style={{ objectFit: 'contain' }}
             />
           </Link>
 

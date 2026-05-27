@@ -23,7 +23,7 @@ Production website for Eastern Land Operations. Built with Next.js 14, TypeScrip
 |-------|-------------|
 | `/` | Homepage — Hero, What We Do, Owner Solutions, Pipeline, Partner Lane, CTA |
 | `/sell-your-property` | Seller-focused page with situations and process |
-| `/partner-with-us` | Partner categories and requirements |
+| `/partner-with-us` | Buyer / investor buy box intake |
 | `/operations` | Full operating model detail |
 | `/about` | Company background and values |
 | `/contact` | Contact info + inline outreach form |
@@ -87,6 +87,34 @@ npm run dev
 Visit [http://localhost:3000](http://localhost:3000)
 
 ---
+
+## Lead Intake System
+
+The site uses one shared intake backend with two primary production questionnaires:
+
+- Seller / Warm Lead Property Intake: `src/app/sell-your-property/page.tsx`
+- Buyer / Investor Buy Box Intake: `src/app/partner-with-us/page.tsx`
+
+Shared plumbing:
+
+- Reusable field component: `src/components/forms/FormField.tsx`
+- Shared schemas and types: `src/lib/outreachSchemas.ts`
+- Submission handler: `src/app/api/outreach/route.ts`
+- Email delivery and CRM handoff point: `src/lib/email.ts`
+
+### Where submissions go
+
+Current behavior:
+
+1. Browser submits to `/api/outreach`
+2. API validates payload with Zod
+3. API sends structured email to `CONTACT_EMAIL`
+4. Optional seller photo uploads are attached to that email
+
+### Where to connect CRM later
+
+If you later want Podio, Salesforce, HubSpot, Airtable, Notion, or another CRM, connect it in
+`src/app/api/outreach/route.ts` after validation. Keep `src/lib/email.ts` as the email fallback.
 
 ## Testing Form Submissions
 

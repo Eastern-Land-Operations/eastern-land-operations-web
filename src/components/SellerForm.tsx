@@ -1,73 +1,99 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import FormField from '@/components/forms/FormField'
+import {
+  contactMethodOptions,
+  decisionTimelineOptions,
+  occupancyOptions,
+  sellerFormSchema,
+  sellerOutcomeOptions,
+  sellerPropertyTypes,
+  sellerSituations,
+  type SellerFormSubmission,
+} from '@/lib/outreachSchemas'
 
-interface SellerFormState {
-  fullName: string
-  email: string
-  phone: string
-  propertyAddress: string
-  propertyCity: string
-  propertyState: string
-  propertyZip: string
-  propertyType: string
-  condition: string
-  occupancyStatus: string
-  timeline: string
-  situation: string
-  referralSource: string
-  _hp: string
+type SellerFormState = SellerFormSubmission & {
+  photos: File[]
 }
 
 const initial: SellerFormState = {
+  submissionType: 'property-owner',
   fullName: '',
-  email: '',
   phone: '',
+  email: '',
   propertyAddress: '',
-  propertyCity: '',
-  propertyState: '',
-  propertyZip: '',
-  propertyType: '',
-  condition: '',
-  occupancyStatus: '',
-  timeline: '',
-  situation: '',
+  propertyOwnership: '',
+  otherDecisionMakers: '',
+  occupancyStatus: 'Unknown',
+  propertyType: 'Single-family',
+  situation: 'Just exploring options',
+  knownRepairs: '',
+  timeline: 'Just exploring',
+  desiredOutcome: 'Help understanding options',
+  taxMortgageIssues: '',
+  preferredContact: 'Phone',
+  bestTimeToContact: '',
+  notes: '',
   referralSource: '',
   _hp: '',
+  photos: [],
 }
 
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <label className="form-label">{label}</label>
-      {children}
-      {error && <p className="form-error">{error}</p>}
-    </div>
-  )
-}
+type SellerErrors = Partial<Record<keyof SellerFormState, string>>
 
 export default function SellerForm() {
   const [form, setForm] = useState<SellerFormState>(initial)
+  const [errors, setErrors] = useState<SellerErrors>({})
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
-  const [errors, setErrors] = useState<Partial<Record<keyof SellerFormState, string>>>({})
 
-  const set = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const selectedFilesText = useMemo(() => {
+    if (form.photos.length === 0) return 'No files selected'
+    return `${form.photos.length} file${form.photos.length === 1 ? '' : 's'} selected`
+  }, [form.photos])
+
+  const updateField = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target
-    setForm(prev => ({ ...prev, [name]: value }))
+    setForm((prev) => ({ ...prev, [name]: value }))
     if (errors[name as keyof SellerFormState]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
+      setErrors((prev) => ({ ...prev, [name]: '' }))
+    }
+  }
+
+  const updateFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []).slice(0, 5)
+    setForm((prev) => ({ ...prev, photos: files }))
+    if (errors.photos) {
+      setErrors((prev) => ({ ...prev, photos: '' }))
     }
   }
 
   const validate = () => {
-    const e: Partial<Record<keyof SellerFormState, string>> = {}
-    if (!form.fullName.trim()) e.fullName = 'Required'
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) e.email = 'Valid email required'
-    if (form.phone.replace(/\D/g, '').length < 10) e.phone = 'Valid phone required'
-    if (!form.propertyAddress.trim()) e.propertyAddress = 'Property address required'
-    setErrors(e)
-    return Object.keys(e).length === 0
+    const payload = { ...form }
+    delete (payload as Partial<SellerFormState>).photos
+
+    const parsed = sellerFormSchema.safeParse(payload)
+
+    if (parsed.success) {
+      setErrors({})
+      return true
+    }
+
+    const nextErrors: SellerErrors = {}
+    for (const issue of parsed.error.issues) {
+      const field = issue.path[0] as keyof SellerFormState
+      nextErrors[field] = issue.message
+    }
+
+    if (form.photos.some((file) => file.size > 10 * 1024 * 1024)) {
+      nextErrors.photos = 'Each file must be 10MB or less'
+    }
+
+    setErrors(nextErrors)
+    return false
   }
 
   const submit = async (e: React.FormEvent) => {
@@ -78,30 +104,35 @@ export default function SellerForm() {
     setErrorMessage('')
 
     try {
+      const body = new FormData()
+      body.set('submissionType', form.submissionType)
+      body.set('fullName', form.fullName)
+      body.set('phone', form.phone)
+      body.set('email', form.email)
+      body.set('propertyAddress', form.propertyAddress)
+      body.set('propertyOwnership', form.propertyOwnership)
+      body.set('otherDecisionMakers', form.otherDecisionMakers)
+      body.set('occupancyStatus', form.occupancyStatus)
+      body.set('propertyType', form.propertyType)
+      body.set('situation', form.situation)
+      body.set('knownRepairs', form.knownRepairs)
+      body.set('timeline', form.timeline)
+      body.set('desiredOutcome', form.desiredOutcome)
+      body.set('taxMortgageIssues', form.taxMortgageIssues)
+      body.set('preferredContact', form.preferredContact)
+      body.set('bestTimeToContact', form.bestTimeToContact)
+      body.set('notes', form.notes)
+      body.set('referralSource', form.referralSource)
+      body.set('_hp', form._hp)
+
+      form.photos.forEach((file) => body.append('photos', file))
+
       const res = await fetch('/api/outreach', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          submissionType: 'property-owner',
-          fullName: form.fullName,
-          email: form.email,
-          phone: form.phone,
-          propertyAddress: form.propertyAddress,
-          propertyCity: form.propertyCity,
-          propertyState: form.propertyState,
-          propertyZip: form.propertyZip,
-          propertyType: form.propertyType,
-          condition: form.condition,
-          occupancyStatus: form.occupancyStatus,
-          timeline: form.timeline,
-          reasonForReaching: form.situation,
-          referralSource: form.referralSource,
-          _hp: form._hp,
-        }),
+        body,
       })
 
       const data = await res.json()
-
       if (!res.ok) {
         throw new Error(data.error || 'Submission failed')
       }
@@ -111,7 +142,9 @@ export default function SellerForm() {
     } catch (err) {
       setStatus('error')
       setErrorMessage(
-        err instanceof Error ? err.message : 'An error occurred. Please try again.'
+        err instanceof Error
+          ? err.message
+          : 'An error occurred while sending your information. Please try again.'
       )
     }
   }
@@ -120,19 +153,14 @@ export default function SellerForm() {
     return (
       <div className="border border-gunmetal p-12 text-center" style={{ borderRadius: '2px' }}>
         <div className="w-8 h-0.5 bg-olive mx-auto mb-8" />
-        <h3 className="t-h3 text-lg mb-3">Submission received.</h3>
-        <p className="t-body text-sm max-w-sm mx-auto mb-6">
-          Our team reviews every submission. We will follow up within one business day.
-        </p>
-        <p className="t-caption">
-          Direct contact:{' '}
-          <a href="mailto:contact@easternlandoperations.com" className="text-off-white hover:text-olive transition-colors">
-            contact@easternlandoperations.com
-          </a>
+        <h3 className="t-h3 text-lg mb-3">Seller intake received.</h3>
+        <p className="t-body text-sm max-w-md mx-auto mb-6">
+          Thank you. Eastern Land Operations received your property information. We&apos;ll review
+          the details and follow up respectfully with possible next steps or options.
         </p>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-8 t-caption hover:text-off-white transition-colors underline underline-offset-4"
+          className="mt-4 t-caption hover:text-off-white transition-colors underline underline-offset-4"
         >
           Submit another property
         </button>
@@ -141,145 +169,234 @@ export default function SellerForm() {
   }
 
   return (
-    <form onSubmit={submit} noValidate>
-      {/* Honeypot */}
+    <form onSubmit={submit} noValidate className="space-y-8">
       <div aria-hidden="true" style={{ display: 'none' }}>
-        <input name="_hp" type="text" tabIndex={-1} autoComplete="off" value={form._hp} onChange={set} />
+        <input
+          name="_hp"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form._hp}
+          onChange={updateField}
+        />
       </div>
 
-      {/* Section: Contact */}
-      <div className="mb-8">
+      <div>
+        <p className="t-eyebrow mb-6">Tell Us About Your Property</p>
+        <p className="t-body text-sm mb-8" style={{ lineHeight: '1.75' }}>
+          Share the basics, your timeline, and anything you think matters. We review each
+          submission with care and respond with options that fit the situation.
+        </p>
+      </div>
+
+      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
         <p className="t-eyebrow mb-6">Contact Information</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Field label="Full Name *" error={errors.fullName}>
-            <input className="form-field" name="fullName" type="text" value={form.fullName} onChange={set} placeholder="Jane Smith" />
-          </Field>
-          <Field label="Email Address *" error={errors.email}>
-            <input className="form-field" name="email" type="email" value={form.email} onChange={set} placeholder="jane@example.com" />
-          </Field>
-          <Field label="Phone Number *" error={errors.phone}>
-            <input className="form-field" name="phone" type="tel" value={form.phone} onChange={set} placeholder="(555) 000-0000" />
-          </Field>
-          <Field label="Relationship to Property">
-            <select className="form-field" name="occupancyStatus" value={form.occupancyStatus} onChange={set}>
-              <option value="">Select...</option>
-              <option value="owner-occupied">Owner — I live there</option>
-              <option value="landlord">Owner — Rental property</option>
-              <option value="inherited">Inherited — I'm an heir</option>
-              <option value="executor">Executor / Estate</option>
-              <option value="agent">Agent / Representative</option>
-              <option value="other">Other</option>
+          <FormField label="Full name" required error={errors.fullName}>
+            <input className="form-field" name="fullName" value={form.fullName} onChange={updateField} />
+          </FormField>
+          <FormField label="Phone number" required error={errors.phone}>
+            <input className="form-field" name="phone" type="tel" value={form.phone} onChange={updateField} />
+          </FormField>
+          <FormField label="Email" required error={errors.email}>
+            <input className="form-field" name="email" type="email" value={form.email} onChange={updateField} />
+          </FormField>
+          <FormField label="Preferred contact method" required error={errors.preferredContact}>
+            <select className="form-field" name="preferredContact" value={form.preferredContact} onChange={updateField}>
+              {contactMethodOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
-          </Field>
+          </FormField>
+          <div className="sm:col-span-2">
+            <FormField label="Best time to contact" error={errors.bestTimeToContact}>
+              <input
+                className="form-field"
+                name="bestTimeToContact"
+                value={form.bestTimeToContact}
+                onChange={updateField}
+                placeholder="Weekday mornings, after 5 PM, weekends, etc."
+              />
+            </FormField>
+          </div>
         </div>
       </div>
 
-      {/* Divider */}
-      <div className="thin-rule mb-8" />
-
-      {/* Section: Property */}
-      <div className="mb-8">
-        <p className="t-eyebrow mb-6">Property Information</p>
+      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <p className="t-eyebrow mb-6">Property Details</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <Field label="Property Address *" error={errors.propertyAddress}>
-              <input className="form-field" name="propertyAddress" type="text" value={form.propertyAddress} onChange={set} placeholder="123 Main Street" />
-            </Field>
+            <FormField label="Property address" required error={errors.propertyAddress}>
+              <input
+                className="form-field"
+                name="propertyAddress"
+                value={form.propertyAddress}
+                onChange={updateField}
+                placeholder="Street address, city, and zip if available"
+              />
+            </FormField>
           </div>
-          <Field label="City">
-            <input className="form-field" name="propertyCity" type="text" value={form.propertyCity} onChange={set} placeholder="Philadelphia" />
-          </Field>
-          <div className="grid grid-cols-2 gap-3">
-            <Field label="State">
-              <input className="form-field" name="propertyState" type="text" value={form.propertyState} onChange={set} placeholder="PA" />
-            </Field>
-            <Field label="ZIP">
-              <input className="form-field" name="propertyZip" type="text" value={form.propertyZip} onChange={set} placeholder="19103" />
-            </Field>
-          </div>
-          <Field label="Property Type">
-            <select className="form-field" name="propertyType" value={form.propertyType} onChange={set}>
-              <option value="">Select...</option>
-              <option value="single-family">Single Family</option>
-              <option value="multi-family">Multi-Family (2–4 units)</option>
-              <option value="apartment">Apartment Building (5+ units)</option>
-              <option value="commercial">Commercial</option>
-              <option value="mixed-use">Mixed Use</option>
-              <option value="vacant-land">Vacant Land / Lot</option>
-              <option value="other">Other</option>
-            </select>
-          </Field>
-          <Field label="Current Condition">
-            <select className="form-field" name="condition" value={form.condition} onChange={set}>
-              <option value="">Select...</option>
-              <option value="excellent">Excellent — Move-in ready</option>
-              <option value="good">Good — Minor updates needed</option>
-              <option value="fair">Fair — Moderate repairs needed</option>
-              <option value="poor">Poor — Significant repairs needed</option>
-              <option value="distressed">Distressed — Major rehab</option>
-            </select>
-          </Field>
-          <Field label="Your Timeline">
-            <select className="form-field" name="timeline" value={form.timeline} onChange={set}>
-              <option value="">Select...</option>
-              <option value="asap">ASAP / Urgent</option>
-              <option value="1-30">Within 30 days</option>
-              <option value="30-90">30–90 days</option>
-              <option value="90-plus">90+ days / Flexible</option>
-              <option value="exploring">Just exploring</option>
-            </select>
-          </Field>
-        </div>
-      </div>
-
-      {/* Divider */}
-      <div className="thin-rule mb-8" />
-
-      {/* Section: Situation */}
-      <div className="mb-8">
-        <p className="t-eyebrow mb-6">Your Situation</p>
-        <div className="flex flex-col gap-4">
-          <Field label="Describe your situation">
-            <textarea
-              className="form-field resize-y"
-              name="situation"
-              value={form.situation}
-              onChange={set}
-              rows={4}
-              placeholder="Tell us what's going on — condition, circumstances, what you're looking for. The more context you provide, the faster we can respond."
-            />
-          </Field>
-          <Field label="How did you hear about us?">
+          <FormField
+            label="Do you own the property?"
+            required
+            error={errors.propertyOwnership}
+            helper="If not, tell us your role so we know how to follow up."
+          >
             <input
               className="form-field"
-              name="referralSource"
-              type="text"
-              value={form.referralSource}
-              onChange={set}
-              placeholder="Referral, search, social, direct mail, etc."
+              name="propertyOwnership"
+              value={form.propertyOwnership}
+              onChange={updateField}
+              placeholder="Yes, no, inherited, representative, etc."
             />
-          </Field>
+          </FormField>
+          <FormField
+            label="Are there other decision-makers involved?"
+            required
+            error={errors.otherDecisionMakers}
+          >
+            <input
+              className="form-field"
+              name="otherDecisionMakers"
+              value={form.otherDecisionMakers}
+              onChange={updateField}
+              placeholder="No, spouse, siblings, business partners, executor, etc."
+            />
+          </FormField>
+          <FormField label="Occupancy" required error={errors.occupancyStatus}>
+            <select className="form-field" name="occupancyStatus" value={form.occupancyStatus} onChange={updateField}>
+              {occupancyOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </FormField>
+          <FormField label="Property type" required error={errors.propertyType}>
+            <select className="form-field" name="propertyType" value={form.propertyType} onChange={updateField}>
+              {sellerPropertyTypes.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </FormField>
+          <FormField label="What best describes the situation?" required error={errors.situation}>
+            <select className="form-field" name="situation" value={form.situation} onChange={updateField}>
+              {sellerSituations.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </FormField>
+          <FormField label="How soon are you looking to make a decision?" required error={errors.timeline}>
+            <select className="form-field" name="timeline" value={form.timeline} onChange={updateField}>
+              {decisionTimelineOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </FormField>
+          <div className="sm:col-span-2">
+            <FormField label="What outcome would be most helpful?" required error={errors.desiredOutcome}>
+              <select className="form-field" name="desiredOutcome" value={form.desiredOutcome} onChange={updateField}>
+                {sellerOutcomeOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </FormField>
+          </div>
         </div>
       </div>
 
-      {/* Error */}
-      {status === 'error' && (
-        <div className="border border-gunmetal p-4 mb-6" style={{ borderRadius: '2px', borderLeftColor: '#C0392B', borderLeftWidth: '3px' }}>
-          <p className="t-body text-sm" style={{ color: '#C0392B' }}>{errorMessage}</p>
+      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <p className="t-eyebrow mb-6">Condition And Context</p>
+        <div className="space-y-4">
+          <FormField
+            label="What repairs or issues are you aware of?"
+            error={errors.knownRepairs}
+            helper="Roof, plumbing, electrical, structural work, cleanout, tenant issues, or anything else you want us to know."
+          >
+            <textarea
+              className="form-field resize-y"
+              name="knownRepairs"
+              value={form.knownRepairs}
+              onChange={updateField}
+              rows={4}
+            />
+          </FormField>
+          <FormField
+            label="Are there any mortgages, taxes, liens, or violations we should know about?"
+            error={errors.taxMortgageIssues}
+          >
+            <textarea
+              className="form-field resize-y"
+              name="taxMortgageIssues"
+              value={form.taxMortgageIssues}
+              onChange={updateField}
+              rows={3}
+            />
+          </FormField>
+          <FormField
+            label="Upload photos if possible"
+            error={errors.photos}
+            helper="Optional. You can upload up to 5 files. Images or PDFs work best."
+          >
+            <div className="space-y-3">
+              <input
+                className="form-field file:mr-4 file:border-0 file:bg-off-white file:px-3 file:py-2 file:text-xs file:font-medium file:uppercase file:tracking-[0.12em] file:text-matte-black"
+                name="photos"
+                type="file"
+                multiple
+                accept="image/*,.pdf,.doc,.docx"
+                onChange={updateFiles}
+              />
+              <p className="t-caption">{selectedFilesText}</p>
+            </div>
+          </FormField>
+          <FormField
+            label="Tell us anything else about the property or situation"
+            error={errors.notes}
+          >
+            <textarea
+              className="form-field resize-y"
+              name="notes"
+              value={form.notes}
+              onChange={updateField}
+              rows={5}
+            />
+          </FormField>
         </div>
-      )}
+      </div>
 
-      {/* Submit */}
+      {status === 'error' ? (
+        <div
+          className="border border-gunmetal p-4"
+          style={{ borderRadius: '2px', borderLeftColor: '#C0392B', borderLeftWidth: '3px' }}
+        >
+          <p className="t-body text-sm" style={{ color: '#C0392B' }}>
+            {errorMessage}
+          </p>
+        </div>
+      ) : null}
+
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
         <button
           type="submit"
           disabled={status === 'submitting'}
           className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          {status === 'submitting' ? 'Sending...' : 'Submit Property'}
+          {status === 'submitting' ? 'Sending...' : 'Submit Property Intake'}
         </button>
         <p className="t-caption">
-          Confidential. We do not sell or share contact data.
+          Required fields are marked. We only use this information to review your situation and
+          follow up.
         </p>
       </div>
     </form>

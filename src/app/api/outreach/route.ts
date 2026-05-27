@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { z } from 'zod'
 import { sendOutreachEmail } from '@/lib/email'
+import { outreachSchema } from '@/lib/outreachSchemas'
 
 // Simple in-memory rate limiter (resets on cold starts; sufficient for low-volume)
 const rateLimitMap = new Map<string, { count: number; windowStart: number }>()
@@ -23,53 +23,6 @@ function checkRateLimit(ip: string): boolean {
   entry.count++
   return true
 }
-
-const outreachSchema = z.object({
-  submissionType: z.enum([
-    'property-owner',
-    'agent',
-    'wholesaler',
-    'contractor',
-    'lender',
-    'investor',
-    'housing-partner',
-    'other',
-  ]),
-  fullName: z.string().min(2, 'Full name is required').max(100),
-  email: z.string().email('Valid email is required'),
-  phone: z.string().min(10, 'Valid phone number is required').max(20),
-  preferredContact: z.string().optional(),
-  // Property fields (optional)
-  propertyAddress: z.string().optional(),
-  propertyCity: z.string().optional(),
-  propertyState: z.string().optional(),
-  propertyZip: z.string().optional(),
-  propertyType: z.string().optional(),
-  occupancyStatus: z.string().optional(),
-  condition: z.string().optional(),
-  knownRepairs: z.string().optional(),
-  codeViolations: z.string().optional(),
-  taxMortgageIssues: z.string().optional(),
-  isListed: z.string().optional(),
-  isUnderContract: z.string().optional(),
-  foreclosureDate: z.string().optional(),
-  desiredPrice: z.string().optional(),
-  timeline: z.string().optional(),
-  // Partner fields (optional)
-  companyName: z.string().optional(),
-  roleService: z.string().optional(),
-  marketsServed: z.string().optional(),
-  partnershipType: z.string().optional(),
-  websiteLink: z.string().optional(),
-  // Situation
-  reasonForReaching: z.string().optional(),
-  desiredOutcome: z.string().optional(),
-  urgentInfo: z.string().optional(),
-  // Honeypot
-  _hp: z.string().optional(),
-  // Source
-  referralSource: z.string().optional(),
-})
 
 export async function POST(request: NextRequest) {
   try {
