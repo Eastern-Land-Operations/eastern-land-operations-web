@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import BrandLogo from '@/components/BrandLogo'
+import BrandLogo from './BrandLogo'
 
 const links = {
   company: [

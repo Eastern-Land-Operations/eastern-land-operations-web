@@ -1,5 +1,5 @@
 import { Resend } from 'resend'
-import type { OutreachSubmission } from '@/lib/outreachSchemas'
+import type { OutreachSubmission } from './outreachSchemas'
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'contact@easternlandoperations.com'
 const FROM_EMAIL = process.env.FROM_EMAIL || 'onboarding@resend.dev'

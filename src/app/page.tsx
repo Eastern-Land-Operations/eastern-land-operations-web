@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import BrandLogo from '@/components/BrandLogo'
+import BrandLogo from '../components/BrandLogo'
 
 export const metadata: Metadata = {
   title: 'Eastern Land Operations | Strategic Land Operator',

@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import FormField from '@/components/forms/FormField'
+import FormField from './forms/FormField'
 import {
   contactMethodOptions,
   decisionTimelineOptions,
@@ -11,7 +11,7 @@ import {
   sellerPropertyTypes,
   sellerSituations,
   type SellerFormSubmission,
-} from '@/lib/outreachSchemas'
+} from '../lib/outreachSchemas'
 
 type SellerFormState = SellerFormSubmission & {
   photos: File[]

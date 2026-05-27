@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { sendOutreachEmail } from '@/lib/email'
-import { outreachSchema } from '@/lib/outreachSchemas'
+import { sendOutreachEmail } from '../../../lib/email'
+import { outreachSchema } from '../../../lib/outreachSchemas'
 
 // Simple in-memory rate limiter (resets on cold starts; sufficient for low-volume)
 const rateLimitMap = new Map<string, { count: number; windowStart: number }>()

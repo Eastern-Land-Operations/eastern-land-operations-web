@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import FormField from '@/components/forms/FormField'
+import FormField from './forms/FormField'
 import {
   buyerAlertMethodOptions,
   buyerFormSchema,
@@ -10,7 +10,7 @@ import {
   buyerRoleOptions,
   rehabToleranceOptions,
   type BuyerFormSubmission,
-} from '@/lib/outreachSchemas'
+} from '../lib/outreachSchemas'
 
 type BuyerFormState = BuyerFormSubmission
 type BuyerErrors = Partial<Record<keyof BuyerFormState, string>>

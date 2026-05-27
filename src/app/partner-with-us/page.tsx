@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import InvestorForm from '@/components/InvestorForm'
+import InvestorForm from '../../components/InvestorForm'
 
 export const metadata: Metadata = {
   title: 'Buyer Network',

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import OutreachForm from '@/components/OutreachForm'
+import OutreachForm from '../../components/OutreachForm'
 
 export const metadata: Metadata = {
   title: 'Submit Opportunity',

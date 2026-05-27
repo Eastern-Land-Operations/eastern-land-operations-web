@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import SellerForm from '@/components/SellerForm'
+import SellerForm from '../../components/SellerForm'
 
 export const metadata: Metadata = {
   title: 'Sell Your Property',
