@@ -153,7 +153,6 @@ export const outreachSchema = z.discriminatedUnion('submissionType', [
       'agent',
       'wholesaler',
       'contractor',
-      'investor',
       'lender',
       'housing-partner',
       'other',

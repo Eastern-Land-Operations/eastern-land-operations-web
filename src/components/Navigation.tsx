@@ -10,7 +10,7 @@ const navLinks = [
   { href: '/operations', label: 'Operations' },
   { href: '/acquisition-criteria', label: 'Acquisition Criteria' },
   { href: '/sell-your-property', label: 'Sell Property' },
-  { href: '/partner-with-us', label: 'Buyer Network' },
+  { href: '/partner-with-us', label: 'Investor Intake' },
   { href: '/contact', label: 'Contact' },
 ]
 
@@ -69,7 +69,7 @@ export default function Navigation() {
             <Link
               href="/sell-your-property"
               className="btn-secondary"
-              style={{ padding: '8px 20px', fontSize: '11px' }}
+              style={{ padding: '10px 20px' }}
             >
               Submit Property
             </Link>

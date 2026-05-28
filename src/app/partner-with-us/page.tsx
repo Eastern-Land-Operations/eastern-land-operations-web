@@ -2,34 +2,34 @@ import type { Metadata } from 'next'
 import InvestorForm from '../../components/InvestorForm'
 
 export const metadata: Metadata = {
-  title: 'Buyer Network',
+  title: 'Investor Intake',
   description:
-    'Buyer and investor intake for Eastern Land Operations. Share your buy box, close speed, and execution profile so we can route matching opportunities intelligently.',
+    'Investor form for Eastern Land Operations. Share your investment criteria, close speed, and purchase preferences so we can share relevant opportunities.',
 }
 
 const buyerLanes = [
   {
     id: '01',
     type: 'Local Landlords',
-    desc: 'Operators looking for rentals, value-add opportunities, and practical buy-and-hold acquisitions.',
+    desc: 'Investors looking for rental properties, value-add opportunities, and practical long-term holds.',
   },
   {
     id: '02',
-    type: 'Flip Operators',
-    desc: 'Buyers seeking margin-driven rehab opportunities with realistic execution plans and clear resale logic.',
+    type: 'House Flippers',
+    desc: 'Buyers looking for projects with realistic renovation scope and clear resale potential.',
   },
   {
     id: '03',
     type: 'Developers And Builders',
-    desc: 'Buyers focused on shells, redevelopment sites, teardowns, and land positions with a build thesis.',
+    desc: 'Investors focused on shells, redevelopment sites, teardowns, and land opportunities.',
   },
 ] as const
 
 const standards = [
-  { label: 'Clarity', value: 'We want to know exactly what you buy, where you buy, and how you close.' },
-  { label: 'Readiness', value: 'Capital, lender relationships, and proof of funds matter more than broad interest.' },
-  { label: 'Fit', value: 'We do not blast deals. We try to route relevant opportunities to relevant buyers.' },
-  { label: 'Speed', value: 'If your criteria are clear, we can match faster and communicate with less friction.' },
+  { label: 'Clarity', value: 'We want to know what you buy, where you buy, and how quickly you can move.' },
+  { label: 'Readiness', value: 'Proof of funds, lender relationships, and realistic purchase criteria matter.' },
+  { label: 'Fit', value: 'We try to share opportunities with investors whose criteria are a strong match.' },
+  { label: 'Speed', value: 'The clearer your criteria are, the easier it is to move quickly when the right property comes up.' },
 ] as const
 
 export default function PartnerWithUsPage() {
@@ -38,19 +38,19 @@ export default function PartnerWithUsPage() {
       <section className="pt-32 pb-24 bg-matte-black border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="max-w-2xl">
-            <p className="t-eyebrow mb-8">Buyer / Investor Buy Box Intake</p>
+            <p className="t-eyebrow mb-8">Investor Information</p>
             <div className="section-rule" />
-            <h1 className="t-h1 mb-8" style={{ fontSize: 'clamp(32px, 4vw, 52px)' }}>
-              Join the ELO
+            <h1 className="t-h1 mb-8">
+              Share your
               <br />
-              buyer network.
+              investment criteria.
             </h1>
-            <p className="t-body mb-8" style={{ fontSize: '15px', lineHeight: '1.7' }}>
+            <p className="t-body mb-8">
               Tell us what you buy, how you fund deals, and how quickly you can move. We use this
-              intake to build a more disciplined buyer network around real opportunities.
+              information to share relevant opportunities with investors whose criteria are a strong fit.
             </p>
             <a href="#form" className="btn-primary">
-              Start Buyer Intake
+              Start Investor Intake
             </a>
           </div>
         </div>
@@ -79,16 +79,16 @@ export default function PartnerWithUsPage() {
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="t-eyebrow mb-6">Why The Intake Matters</p>
+              <p className="t-eyebrow mb-6">Why This Form Matters</p>
               <div className="section-rule" />
-              <h2 className="t-h2 text-2xl mb-6">
-                Better buyer data
+              <h2 className="t-h2 mb-6">
+                Better criteria
                 <br />
-                creates better routing.
+                creates better matching.
               </h2>
-              <p className="t-body" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-                This is not a vanity signup. We use the form to understand execution capacity,
-                criteria, and communication preferences so we can cut down noise and improve fit.
+              <p className="t-body">
+                We use this form to understand your purchase criteria, readiness, and communication
+                preferences so we can send fewer, more relevant opportunities.
               </p>
             </div>
             <div className="flex flex-col gap-0 border border-gunmetal" style={{ borderRadius: '2px' }}>
@@ -108,17 +108,40 @@ export default function PartnerWithUsPage() {
 
       <section id="form" className="bg-graphite py-24">
         <div className="max-w-screen-xl mx-auto px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            <div>
-              <p className="t-eyebrow mb-6">Join The ELO Buyer Network</p>
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.48fr)] gap-8 lg:gap-10 items-start">
+            <div className="lg:sticky lg:top-28">
+              <p className="t-eyebrow mb-6">Investor Information</p>
               <div className="section-rule" />
-              <p className="t-body mb-8" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-                Share your buy box, your capital profile, and how you like to receive deals. If an
-                opportunity matches your criteria, we will know how to reach you.
+              <h2 className="t-h2 mb-5">
+                Better criteria.
+                <br />
+                Better opportunity matching.
+              </h2>
+              <p className="t-body mb-8">
+                Share your criteria, purchase profile, and communication preferences so we can
+                send fewer, more relevant opportunities.
               </p>
+
+              <div className="border border-gunmetal/80 bg-matte-black/20 p-5 mb-6" style={{ borderRadius: '2px' }}>
+                <p className="t-eyebrow mb-4">What To Include</p>
+                <div className="space-y-3">
+                  {[
+                    'The neighborhoods and property types you actively buy.',
+                    'Your realistic price range and rehab tolerance.',
+                    'How quickly you can close and whether proof of funds is ready.',
+                    'How you prefer to receive opportunities.',
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <span className="t-id pt-1">-</span>
+                      <p className="t-body text-sm">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <div className="flex flex-col gap-4 border-t border-gunmetal pt-6">
                 <div>
-                  <p className="t-eyebrow mb-2" style={{ fontSize: '10px' }}>Phone</p>
+                  <p className="t-eyebrow mb-2" style={{ fontSize: '10px' }}>Direct line</p>
                   <a href="tel:3026893912" className="t-mono text-sm hover:text-olive transition-colors">
                     302-689-3912
                   </a>
@@ -131,8 +154,19 @@ export default function PartnerWithUsPage() {
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-2">
-              <InvestorForm />
+
+            <div className="border border-gunmetal/90 bg-matte-black/10 p-5 sm:p-7 lg:p-8" style={{ borderRadius: '2px' }}>
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-gunmetal pb-5 mb-7">
+                <div>
+                  <p className="t-eyebrow mb-2">Investor Intake</p>
+                  <h3 className="t-h3 text-lg">Investor criteria form</h3>
+                </div>
+                <p className="t-caption max-w-xs">
+                  Clear criteria helps us send fewer, better-matched opportunities.
+                </p>
+              </div>
+
+              <InvestorForm embedded />
             </div>
           </div>
         </div>

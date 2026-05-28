@@ -10,6 +10,7 @@
   --slate:        #5C6670;
   --gunmetal:     #3A4047;
   --olive:        #4E5B4C;
+  --line-soft:    rgba(58, 64, 71, 0.82);
 
   --font-display: var(--font-space-grotesk), sans-serif;
   --font-body:    var(--font-inter), sans-serif;
@@ -29,7 +30,7 @@ body {
   color: var(--off-white);
   font-family: var(--font-body);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 /* ── Typography Helpers ────────────────────────────────────── */
@@ -44,6 +45,7 @@ body {
 
 .t-display {
   font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 72px);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.0;
@@ -53,6 +55,7 @@ body {
 .t-h1 {
   font-family: var(--font-display);
   font-weight: 700;
+  font-size: clamp(36px, 4.4vw, 48px);
   letter-spacing: -0.02em;
   line-height: 1.05;
   color: var(--off-white);
@@ -61,6 +64,7 @@ body {
 .t-h2 {
   font-family: var(--font-display);
   font-weight: 600;
+  font-size: clamp(24px, 3vw, 36px);
   letter-spacing: -0.015em;
   line-height: 1.1;
   color: var(--off-white);
@@ -69,6 +73,7 @@ body {
 .t-h3 {
   font-family: var(--font-display);
   font-weight: 600;
+  font-size: 18px;
   letter-spacing: -0.01em;
   line-height: 1.2;
   color: var(--off-white);
@@ -111,7 +116,7 @@ body {
 /* ── Layout Utilities ──────────────────────────────────────── */
 .section-rule {
   width: 40px;
-  height: 2px;
+  height: 1px;
   background: var(--olive);
   margin-bottom: 48px;
 }
@@ -124,20 +129,26 @@ body {
 
 /* ── Form Elements ─────────────────────────────────────────── */
 .form-field {
-  @apply w-full bg-graphite border border-gunmetal text-off-white placeholder-slate/50
-    px-4 py-3 text-sm font-body focus:outline-none focus:border-olive
+  @apply w-full bg-graphite border text-off-white placeholder-slate/50
+    px-4 py-3 text-sm font-body focus:outline-none
     transition-colors duration-150;
+  border-color: var(--line-soft);
   border-radius: 2px;
   font-family: var(--font-body);
   font-size: 14px;
+  line-height: 1.6;
+}
+
+.form-field:focus {
+  border-color: var(--olive);
 }
 
 .form-label {
   display: block;
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--slate);
   margin-bottom: 6px;
@@ -167,14 +178,14 @@ body {
   background: var(--off-white);
   color: var(--matte-black);
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 14px 32px;
+  padding: 14px 28px;
   border-radius: 2px;
   border: 1px solid var(--off-white);
-  transition: background-color 150ms, color 150ms;
+  transition: background-color 150ms, color 150ms, border-color 150ms;
   cursor: pointer;
 }
 
@@ -190,13 +201,13 @@ body {
   background: transparent;
   color: var(--slate);
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 14px 32px;
+  padding: 14px 28px;
   border-radius: 2px;
-  border: 1px solid var(--gunmetal);
+  border: 1px solid var(--line-soft);
   transition: border-color 150ms, color 150ms;
   cursor: pointer;
 }
@@ -208,7 +219,7 @@ body {
 
 /* ── Cards ─────────────────────────────────────────────────── */
 .data-card {
-  border: 1px solid var(--gunmetal);
+  border: 1px solid var(--line-soft);
   padding: 28px 32px;
   background: var(--graphite);
   border-radius: 2px;
@@ -217,9 +228,10 @@ body {
 /* ── Nav ───────────────────────────────────────────────────── */
 .nav-link {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--slate);
   transition: color 150ms;
 }

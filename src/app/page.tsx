@@ -3,133 +3,128 @@ import Link from 'next/link'
 import BrandLogo from '../components/BrandLogo'
 
 export const metadata: Metadata = {
-  title: 'Eastern Land Operations | Strategic Land Operator',
+  title: 'Eastern Land Operations | Real Estate Acquisitions',
   description:
-    'Eastern Land Operations is a strategic land operator with institutional discipline. Tactical acquisitions, redevelopment outcomes, long-horizon ownership.',
+    'Eastern Land Operations buys, improves, and manages real estate with a disciplined long-term approach.',
 }
 
 const operations = [
   {
     id: '01',
-    label: 'Source',
-    body: 'Off-market and pre-market identification. We move before the listing exists.',
+    label: 'Find',
+    body: 'Direct outreach, referrals, and local research help us identify properties early.',
   },
   {
     id: '02',
-    label: 'Underwrite',
-    body: 'Full financial and risk analysis. Every acquisition is modeled before a decision is made.',
+    label: 'Evaluate',
+    body: 'Financials, repair scope, and timing are reviewed before any decision is made.',
   },
   {
     id: '03',
     label: 'Acquire',
-    body: 'As-is acquisitions. Speed and certainty of close are operational assets.',
+    body: 'Properties are purchased in the structure that best fits the situation.',
   },
   {
     id: '04',
-    label: 'Redevelop',
-    body: 'Properties repositioned to highest and best use. No cosmetic passes — structural outcomes.',
+    label: 'Improve',
+    body: 'Work is planned carefully and managed against budget, timeline, and long-term use.',
   },
   {
     id: '05',
-    label: 'Hold or Exit',
-    body: 'Exits are structured for maximum return. Select assets held as long-term positions.',
+    label: 'Hold Or Sell',
+    body: 'The next step depends on the property, the market, and the long-term value of keeping it.',
   },
   {
     id: '06',
-    label: 'Iterate',
-    body: 'Each circuit generates intelligence that informs the next. The system compounds.',
+    label: 'Learn',
+    body: 'Every project adds experience that improves the next decision.',
   },
-]
+] as const
 
 const criteria = [
-  { label: 'Geography', value: 'Greater Philadelphia · South Jersey · Delaware Valley' },
-  { label: 'Property Types', value: 'Residential · Multi-Family · Mixed-Use · Vacant Land' },
-  { label: 'Condition', value: 'All conditions considered — distressed, occupied, code-flagged' },
-  { label: 'Situation', value: 'Pre-foreclosure · Inherited · Tired Landlord · Tax Delinquent' },
-  { label: 'Price Range', value: 'Acquisition capacity scales with deal quality' },
-  { label: 'Timeline', value: 'ASAP to 90+ days — we move at your pace' },
-]
+  { label: 'Geography', value: 'Greater Philadelphia, South Jersey, and the Delaware Valley' },
+  { label: 'Property Types', value: 'Residential, multifamily, mixed-use, and vacant land' },
+  { label: 'Condition', value: 'All conditions considered, including distressed or occupied properties' },
+  { label: 'Situation', value: 'Inherited property, tax issues, vacant property, or owner transition' },
+  { label: 'Price Range', value: 'Capacity scales with deal quality and fit' },
+  { label: 'Timeline', value: 'Urgent situations through extended timelines' },
+] as const
 
 export default function HomePage() {
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative min-h-screen bg-matte-black flex items-center border-b border-gunmetal pt-16">
+      <section className="relative min-h-screen overflow-hidden bg-matte-black flex items-center border-b border-gunmetal pt-16">
         <div className="max-w-screen-xl mx-auto px-8 w-full py-24">
           <div className="max-w-3xl">
             <p className="t-eyebrow mb-8">Eastern Land Operations</p>
             <div className="section-rule" />
-            <h1
-              className="t-display mb-8"
-              style={{ fontSize: 'clamp(40px, 6vw, 72px)' }}
-            >
+            <h1 className="t-display mb-8">
               Strategic land operator
               <br />
               with institutional
               <br />
               discipline.
             </h1>
-            <p className="t-body mb-12" style={{ maxWidth: '540px', fontSize: '15px', lineHeight: '1.7' }}>
-              Eastern Land Operations acquires, repositions, and holds land and property across
-              high-priority corridors. Every acquisition is a deliberate position. Every decision
-              is underwritten. No impulse buys. No cosmetic flips.
+            <p className="t-body mb-12 max-w-[540px]">
+              Eastern Land Operations acquires, improves, and holds land and property across
+              high-priority local corridors. Every property is reviewed carefully. No impulse buys.
+              No cosmetic flips.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/sell-your-property" className="btn-primary">
                 Submit Property
               </Link>
               <Link href="/partner-with-us" className="btn-secondary">
-                Buyer Network
+                Investor Intake
               </Link>
             </div>
           </div>
 
-          {/* Emblem — right side */}
           <div
-            className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:block"
+            className="pointer-events-none absolute inset-y-0 right-0 hidden xl:flex w-[320px] 2xl:w-[400px] items-center justify-end pr-8"
             aria-hidden="true"
           >
             <BrandLogo
               variant="light"
               alt=""
-              width={300}
-              height={186}
+              width={400}
+              height={247}
               priority
-              className="opacity-10"
+              className="w-full opacity-[0.08]"
             />
           </div>
         </div>
       </section>
 
-      {/* ── What We Do ───────────────────────────────────────── */}
       <section className="bg-graphite py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             <div>
               <p className="t-eyebrow mb-6">What We Do</p>
               <div className="section-rule" />
-              <h2 className="t-h2 text-2xl mb-6">
-                Tactical acquisitions.<br />Redevelopment outcomes.
+              <h2 className="t-h2 mb-6">
+                Real estate acquisitions.
+                <br />
+                Practical redevelopment.
               </h2>
               <p className="t-body">
-                We are not a real estate agency. We are not a wholesaler. We are an operational
-                entity that sources, underwrites, acquires, and repositions real property — with
-                the discipline of an institutional operator and the speed of a field team.
+                We are a company that finds, reviews, buys, and improves real property with a
+                disciplined long-term approach.
               </p>
             </div>
             <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-0 border border-gunmetal" style={{ borderRadius: '2px' }}>
               {[
                 {
-                  heading: 'Land Acquisitions',
-                  body: 'Off-market sourcing with underwriting discipline at every stage. We do not overpay. We do not pass on the right deal.',
+                  heading: 'Acquisitions',
+                  body: 'Off-market and direct-to-owner opportunities reviewed carefully at every stage.',
                 },
                 {
                   heading: 'Redevelopment',
-                  body: 'Properties repositioned to highest and best use. We hold position through the full cycle — not just to the next flip.',
+                  body: 'Properties are improved with a clear plan, realistic scope, and practical next step.',
                 },
                 {
-                  heading: 'Long-Horizon Ownership',
-                  body: 'Select assets become long-term portfolio positions. Not everything is for sale. Some things compound.',
+                  heading: 'Long-Term Ownership',
+                  body: 'Some properties are sold. Others are held as long-term positions that continue to compound value.',
                 },
               ].map((item, i) => (
                 <div
@@ -145,20 +140,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Operations Model ─────────────────────────────────── */}
       <section className="bg-matte-black py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
-          <p className="t-eyebrow mb-6">Operations Model</p>
+          <p className="t-eyebrow mb-6">How We Work</p>
           <div className="section-rule" />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <h2 className="t-h2 text-2xl">
-              Full-cycle execution.<br />
-              No phase outsourced.
+            <h2 className="t-h2">
+              A repeatable process.
+              <br />
+              No unnecessary noise.
             </h2>
-            <p className="t-body" style={{ fontSize: '15px' }}>
-              Every opportunity runs the same sequence. Source, screen, underwrite, walk,
-              structure, execute, hold or exit. No shortcuts. Every decision logged. Every
-              cycle generates intelligence for the next.
+            <p className="t-body">
+              Every opportunity follows the same sequence: review the basics, confirm the details,
+              close carefully, manage the work, and choose the best long-term outcome.
             </p>
           </div>
 
@@ -167,13 +161,13 @@ export default function HomePage() {
               <div
                 key={op.id}
                 className={`p-8 ${
-                  [0,1,3,4].includes(i) ? 'border-b sm:border-b-0' : ''
+                  [0, 1, 3, 4].includes(i) ? 'border-b sm:border-b-0' : ''
                 } ${
                   i % 3 !== 2 ? 'lg:border-r border-gunmetal' : ''
                 } ${
                   i < 4 ? 'lg:border-b border-gunmetal' : ''
                 } ${
-                  [0,2,4].includes(i) ? 'sm:border-r border-gunmetal' : ''
+                  [0, 2, 4].includes(i) ? 'sm:border-r border-gunmetal' : ''
                 } ${
                   i < 4 ? 'sm:border-b border-gunmetal' : ''
                 }`}
@@ -187,27 +181,25 @@ export default function HomePage() {
 
           <div className="mt-10">
             <Link href="/operations" className="btn-secondary">
-              View Full Operations Model
+              View How We Work
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Acquisition Criteria ─────────────────────────────── */}
       <section className="bg-graphite py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
               <p className="t-eyebrow mb-6">Acquisition Criteria</p>
               <div className="section-rule" />
-              <h2 className="t-h2 text-2xl mb-6">
-                We know what we want.<br />
-                And what we don't.
+              <h2 className="t-h2 mb-6">
+                We know what we want.
+                <br />
+                And what we do not.
               </h2>
               <p className="t-body mb-8">
-                Criteria are not soft preferences — they are operational filters. Every
-                submission is evaluated against the same standards. Deals that fit move fast.
-                Deals that don't, don't move.
+                Every property is reviewed against the same practical standards. Good fit matters.
               </p>
               <Link href="/acquisition-criteria" className="btn-secondary">
                 Full Criteria
@@ -229,32 +221,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Redevelopment Discipline ─────────────────────────── */}
       <section className="bg-matte-black py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
-          <p className="t-eyebrow mb-6">Redevelopment Discipline</p>
+          <p className="t-eyebrow mb-6">Redevelopment Approach</p>
           <div className="section-rule" />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <h2 className="t-h2 text-2xl mb-6">
-                Outcomes, not renovations.
-              </h2>
+              <h2 className="t-h2 text-2xl mb-6">Outcomes, not quick cosmetics.</h2>
               <p className="t-body mb-6" style={{ fontSize: '15px' }}>
-                We do not flip houses. We reposition assets. The distinction is material.
-                Every redevelopment decision starts with the exit and works backward through
-                the scope. Nothing is done cosmetically. Everything is structural.
+                We do not focus on surface-level fixes for the sake of appearances. We focus on
+                improvements that support the property’s next stage of use, ownership, or sale.
               </p>
               <p className="t-body" style={{ fontSize: '15px' }}>
-                Our redevelopment approach applies the same institutional discipline as the
-                acquisition — budget-driven, schedule-bound, exit-oriented.
+                Our redevelopment approach is budget-driven, schedule-aware, and focused on a clear outcome.
               </p>
             </div>
             <div className="flex flex-col gap-6">
               {[
-                { principle: 'Exit-first underwriting', detail: 'Scope is set by the exit value, not the want list. If it doesn\'t move the needle, it doesn\'t move.' },
-                { principle: 'No cosmetic passes', detail: 'Lipstick on a structural problem is not a strategy. We address root conditions or we price them in.' },
-                { principle: 'Schedule discipline', detail: 'Time is a cost. Extended hold periods erode margin. We move with deliberate speed.' },
-                { principle: 'Highest and best use', detail: 'The exit isn\'t always a sale. Hold, refinance, and portfolio retention are all legitimate outcomes.' },
+                { principle: 'Outcome-first planning', detail: 'Scope is set by the likely outcome, not a wish list. If it does not meaningfully improve the project, it does not get added.' },
+                { principle: 'Address real issues', detail: 'When a deeper problem exists, we address it directly instead of hiding it behind surface updates.' },
+                { principle: 'Respect the timeline', detail: 'Time matters. Work should move with purpose instead of drifting.' },
+                { principle: 'Choose the right next step', detail: 'Sale, rental, refinance, or long-term hold are all valid outcomes when they fit the property.' },
               ].map((item) => (
                 <div key={item.principle} className="border-l-2 border-olive pl-6">
                   <h3 className="t-h3 text-sm mb-1">{item.principle}</h3>
@@ -266,55 +253,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Inquiry Section ──────────────────────────────────── */}
       <section className="bg-graphite py-24">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Seller */}
             <div className="border border-gunmetal p-10" style={{ borderRadius: '2px' }}>
               <p className="t-eyebrow mb-6">Property Owners</p>
               <div className="section-rule" />
               <h2 className="t-h2 text-xl mb-4">Submit your property.</h2>
               <p className="t-body mb-8">
-                Any condition. Any situation. We evaluate every submission honestly and
-                respond with a clear path — purchase, creative structure, or referral.
-                No pressure. No obligation.
+                Any condition. Any situation. We review every submission honestly and respond with
+                a clear next step.
               </p>
               <Link href="/sell-your-property" className="btn-primary">
                 Submit Property
               </Link>
             </div>
 
-            {/* Capital */}
             <div className="border border-gunmetal p-10" style={{ borderRadius: '2px' }}>
-            <p className="t-eyebrow mb-6">Buyers And Investors</p>
-            <div className="section-rule" />
-            <h2 className="t-h2 text-xl mb-4">Join the ELO buyer network.</h2>
-            <p className="t-body mb-8">
-                Tell us what you buy, where you buy, and how you move. We use your buy box to
-                route relevant opportunities to serious operators, landlords, developers, and
-                investor partners.
-            </p>
-            <Link href="/partner-with-us" className="btn-primary">
-                Buyer Intake
-            </Link>
+              <p className="t-eyebrow mb-6">Investors</p>
+              <div className="section-rule" />
+              <h2 className="t-h2 text-xl mb-4">Share your investment criteria.</h2>
+              <p className="t-body mb-8">
+                Tell us what you buy, where you buy, and how you like to review opportunities.
+                We use your criteria to share relevant properties with investors, landlords,
+                developers, and partners.
+              </p>
+              <Link href="/partner-with-us" className="btn-primary">
+                Investor Intake
+              </Link>
             </div>
           </div>
 
-          {/* Contact strip */}
           <div className="mt-16 pt-10 border-t border-gunmetal flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <p className="t-body text-sm">Direct line:</p>
             <div className="flex flex-col sm:flex-row gap-8">
-              <a
-                href="tel:3026893912"
-                className="t-mono text-sm hover:text-off-white transition-colors"
-              >
+              <a href="tel:3026893912" className="t-mono text-sm hover:text-off-white transition-colors">
                 302-689-3912
               </a>
-              <a
-                href="mailto:contact@easternlandoperations.com"
-                className="t-mono text-sm hover:text-off-white transition-colors"
-              >
+              <a href="mailto:contact@easternlandoperations.com" className="t-mono text-sm hover:text-off-white transition-colors">
                 contact@easternlandoperations.com
               </a>
             </div>

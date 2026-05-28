@@ -4,147 +4,145 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Operations',
   description:
-    'The ELO operations model. Full-cycle land acquisitions — source, underwrite, acquire, redevelop, hold or exit. Institutional discipline applied at every phase.',
+    'How Eastern Land Operations reviews opportunities, buys property, manages improvements, and chooses the best next step for each project.',
 }
 
 const phases = [
   {
     id: '01',
-    phase: 'Source',
-    tagline: 'Off-market. Pre-market. Before the listing.',
-    body: 'Deal flow is a function of infrastructure, not luck. We build sourcing systems — direct outreach, referral networks, data-driven targeting — that generate consistent pipeline from sellers who are not yet (or will never be) on market.',
+    phase: 'Find',
+    tagline: 'Direct outreach, local relationships, and market research.',
+    body: 'We look for opportunities through direct contact, referrals, and targeted research so we can review properties before they become widely marketed.',
     points: [
-      'Direct seller outreach across defined target corridors',
-      'Agent and wholesaler referral network',
-      'Distressed property intelligence and monitoring',
-      'Pre-foreclosure and tax delinquency identification',
+      'Direct outreach to owners in target areas',
+      'Agent and referral relationships',
+      'Research on distressed or underused properties',
+      'Review of properties tied to time-sensitive situations',
     ],
   },
   {
     id: '02',
-    phase: 'Screen',
-    tagline: 'Not every deal is the right deal.',
-    body: 'Initial criteria filter before committing field resources. Geography, price range, property type, condition, and situation are assessed before a walkthrough is scheduled. Speed in screening protects the time we spend on the deals that matter.',
+    phase: 'Review',
+    tagline: 'Not every property is the right fit.',
+    body: 'Before spending time on a property, we review the basics: location, price range, property type, condition, and the seller’s situation.',
     points: [
-      'Criteria alignment check — geography, type, price range',
-      'Preliminary seller situation assessment',
+      'Initial fit check for location, property type, and price range',
+      'Early review of the seller situation',
       'Title and lien flag review',
-      'Quick exit modeling before field commitment',
+      'Early resale or hold review before an in-person visit',
     ],
   },
   {
     id: '03',
-    phase: 'Underwrite',
-    tagline: 'Every number is real. No optimism.',
-    body: 'Full financial and risk analysis. ARV, MAO, repair estimate, carrying costs, exit costs, and timeline are modeled conservatively. We underwrite to outcomes, not to hopeful projections. If it does not pencil conservatively, it does not advance.',
+    phase: 'Evaluate',
+    tagline: 'The numbers have to make sense.',
+    body: 'We review likely resale value, repair costs, carrying costs, closing costs, and timing. If the project does not make sense on conservative assumptions, we pass.',
     points: [
-      'ARV analysis from comparable closed sales — not listings',
-      'Conservative MAO calculation based on defined exit',
-      'Scope and repair estimate framework',
-      'Carrying cost, financing cost, and exit cost modeling',
+      'Review of comparable closed sales rather than list prices',
+      'Clear purchase-price limits based on the likely outcome',
+      'Repair scope and cost review',
+      'Financing, carrying cost, and resale cost review',
     ],
   },
   {
     id: '04',
-    phase: 'Walk',
-    tagline: 'You cannot underwrite what you have not seen.',
-    body: 'Field verification of everything underwriting assumed. Condition, layout, structural integrity, neighborhood dynamics, access, and environmental signals are all captured on-site. The walk either confirms the model or changes it.',
+    phase: 'Visit',
+    tagline: 'Seeing the property matters.',
+    body: 'An in-person visit helps confirm condition, layout, access, neighborhood context, and issues that can be missed from photos or public records.',
     points: [
-      'Physical condition assessment and scope verification',
+      'Property condition review and scope confirmation',
       'Neighborhood and block-level observation',
-      'Environmental and access signals',
-      'Seller conversation and situation depth',
+      'Access and surrounding-property review',
+      'Conversation with the owner or contact when helpful',
     ],
   },
   {
     id: '05',
     phase: 'Structure',
-    tagline: 'The right structure for the right situation.',
-    body: 'Every acquisition is structured differently. Cash purchase, owner financing, subject-to, installment sale, lease-option — the structure depends on the seller situation, our capital position, and the exit path. One tool does not fit every deal.',
+    tagline: 'The process should fit the situation.',
+    body: 'Not every property should be purchased the same way. Depending on the situation, we may use a direct purchase, seller financing, or another structure that better fits the property and the seller’s timeline.',
     points: [
-      'Capital structure determination based on exit path',
-      'Creative structure evaluation where traditional does not fit',
+      'Purchase structure based on the property and expected outcome',
+      'Flexible options when a standard purchase is not the best fit',
       'Title, legal, and closing coordination',
-      'Seller situation consideration in structure design',
+      'Seller timeline and circumstances considered in the process',
     ],
   },
   {
     id: '06',
     phase: 'Execute',
-    tagline: 'Close. Mobilize. Redevelop.',
-    body: 'From signed contract to stabilization. We coordinate all parties — title, capital, contractors, legal — and execute against a defined scope and schedule. Time is a cost. Every day of hold without progress is margin leaving the deal.',
+    tagline: 'Close carefully and manage the work.',
+    body: 'After a property is under contract, we coordinate title, funding, contractors, and legal steps so the closing and improvement process stays organized and on schedule.',
     points: [
-      'Closing coordination with title and legal',
-      'Redevelopment scope execution against budget',
+      'Closing coordination with title and legal teams',
+      'Improvement work managed against budget',
       'Contractor management and schedule accountability',
-      'Progress tracking against pro forma assumptions',
+      'Progress tracked against the original plan',
     ],
   },
   {
     id: '07',
-    phase: 'Stabilize / Exit',
-    tagline: 'Hold, refinance, or disposition — decided at underwriting.',
-    body: 'The exit is not decided at the end. It is decided at underwriting and confirmed through execution. We evaluate retail sale, hold-and-rent, refinance, wholesale, joint venture, or portfolio sale based on the market at stabilization and the original model.',
+    phase: 'Hold Or Sell',
+    tagline: 'The right next step depends on the property.',
+    body: 'Once the work is complete or the property is stable, we decide whether to sell, rent, refinance, or hold based on the market, the property, and the long-term value of keeping it.',
     points: [
-      'Exit comparison at stabilization — retail, hold, JV, portfolio',
-      'Refinance evaluation for long-term hold assets',
-      'Disposition coordination if sale is the exit',
-      'Intelligence capture for next acquisition cycle',
+      'Comparison of sale, rental, refinance, and hold options',
+      'Refinance review for long-term ownership opportunities',
+      'Sale coordination if selling is the best outcome',
+      'Lessons carried forward into future decisions',
     ],
   },
-]
+] as const
 
 export default function OperationsPage() {
   return (
     <>
-      {/* Hero */}
       <section className="pt-32 pb-24 bg-matte-black border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="max-w-2xl">
-            <p className="t-eyebrow mb-8">Operations Model</p>
+            <p className="t-eyebrow mb-8">How We Work</p>
             <div className="section-rule" />
-            <h1 className="t-h1 mb-8" style={{ fontSize: 'clamp(32px, 4vw, 52px)' }}>
-              Full-cycle execution.
+            <h1 className="t-h1 mb-8">
+              A clear process.
               <br />
-              No phase outsourced.
+              From first review
+              <br />
+              to final outcome.
             </h1>
-            <p className="t-body" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-              Every acquisition runs the same seven-phase sequence. No shortcuts. Every
-              decision is documented. Every cycle generates field intelligence that
-              informs the next. The system compounds.
+            <p className="t-body">
+              Every property follows the same general process: review the opportunity, confirm
+              the details, close carefully, manage improvements, and choose the best long-term
+              outcome.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Pipeline phases */}
       <section className="bg-graphite py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="flex flex-col gap-0 border border-gunmetal" style={{ borderRadius: '2px' }}>
-            {phases.map((phase, i) => (
+            {phases.map((phase, index) => (
               <div
                 key={phase.id}
                 className={`grid grid-cols-1 lg:grid-cols-3 gap-0 ${
-                  i < phases.length - 1 ? 'border-b border-gunmetal' : ''
+                  index < phases.length - 1 ? 'border-b border-gunmetal' : ''
                 }`}
               >
-                {/* Label col */}
                 <div className="p-8 lg:border-r border-gunmetal border-b lg:border-b-0">
                   <p className="t-id mb-2">{phase.id}</p>
                   <h2 className="t-h2 text-xl mb-2">{phase.phase}</h2>
-                  <p className="t-body text-sm" style={{ fontStyle: 'italic' }}>{phase.tagline}</p>
+                  <p className="t-body text-sm" style={{ fontStyle: 'italic' }}>
+                    {phase.tagline}
+                  </p>
                 </div>
 
-                {/* Content col */}
                 <div className="lg:col-span-2 p-8">
-                  <p className="t-body mb-6" style={{ fontSize: '14px', lineHeight: '1.7' }}>
-                    {phase.body}
-                  </p>
+                  <p className="t-body mb-6">{phase.body}</p>
                   <ul className="flex flex-col gap-2">
-                    {phase.points.map(pt => (
-                      <li key={pt} className="flex items-start gap-3">
-                        <span className="t-id mt-0.5 flex-shrink-0">—</span>
-                        <span className="t-body text-sm">{pt}</span>
+                    {phase.points.map((point) => (
+                      <li key={point} className="flex items-start gap-3">
+                        <span className="t-id mt-0.5 flex-shrink-0">-</span>
+                        <span className="t-body text-sm">{point}</span>
                       </li>
                     ))}
                   </ul>
@@ -155,40 +153,37 @@ export default function OperationsPage() {
         </div>
       </section>
 
-      {/* Intelligence note */}
       <section className="bg-matte-black py-20 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <p className="t-eyebrow mb-6">Field Intelligence</p>
+              <p className="t-eyebrow mb-6">What We Learn</p>
               <div className="section-rule" />
-              <h2 className="t-h2 text-2xl mb-6">
-                Every circuit generates intelligence.
-              </h2>
-              <p className="t-body mb-4" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-                Each acquisition is a circuit — a complete cycle from first contact through
-                final exit. Every circuit generates documented intelligence: what was found on
-                the walk, what the neighborhood signaled, what the seller revealed, what the
-                numbers actually were versus what was modeled.
+              <h2 className="t-h2 text-2xl mb-6">Every project improves the next one.</h2>
+              <p className="t-body mb-4">
+                Every project teaches us something useful about pricing, scope, neighborhood
+                patterns, timing, and execution. That experience helps us make better decisions
+                on the next opportunity.
               </p>
-              <p className="t-body" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-                This intelligence accumulates. It improves sourcing criteria, sharpens
-                underwriting assumptions, and builds market-specific knowledge that cannot
-                be purchased from a data vendor.
+              <p className="t-body">
+                Over time, that experience builds practical local knowledge that helps us move
+                faster, price more accurately, and avoid avoidable mistakes.
               </p>
             </div>
             <div className="border border-gunmetal p-8" style={{ borderRadius: '2px' }}>
-              <p className="t-eyebrow mb-6">Circuit Format</p>
+              <p className="t-eyebrow mb-6">What We Track</p>
               <div className="flex flex-col gap-0">
                 {[
-                  { label: 'Circuit ID', value: 'C-[YEAR]-[SEQ]', note: 'Canonical reference — DM Mono' },
-                  { label: 'Phase Tracking', value: 'Source → Exit', note: '7-phase pipeline, logged' },
-                  { label: 'Intelligence Categories', value: '13 tracked', note: 'Per site, per acquisition' },
-                  { label: 'Documentation', value: 'Mandatory', note: 'No undocumented decisions' },
-                ].map((item, i) => (
+                  { label: 'Property Details', value: 'Recorded', note: 'Address, condition, and ownership context' },
+                  { label: 'Project Stage', value: 'Updated', note: 'Reviewed throughout the process' },
+                  { label: 'Costs And Timing', value: 'Tracked', note: 'Repairs, timing, and hold costs' },
+                  { label: 'Key Decisions', value: 'Documented', note: 'Important choices are written down' },
+                ].map((item, index) => (
                   <div
                     key={item.label}
-                    className={`flex justify-between items-start py-5 ${i < 3 ? 'border-b border-gunmetal' : ''}`}
+                    className={`flex justify-between items-start py-5 ${
+                      index < 3 ? 'border-b border-gunmetal' : ''
+                    }`}
                   >
                     <p className="t-id">{item.label}</p>
                     <div className="text-right">
@@ -203,7 +198,6 @@ export default function OperationsPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="bg-graphite py-20">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="flex flex-col sm:flex-row gap-4">
@@ -211,7 +205,7 @@ export default function OperationsPage() {
               Acquisition Criteria
             </Link>
             <Link href="/sell-your-property" className="btn-secondary">
-              Submit a Property
+              Submit A Property
             </Link>
           </div>
         </div>

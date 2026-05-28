@@ -42,7 +42,11 @@ const initial: SellerFormState = {
 
 type SellerErrors = Partial<Record<keyof SellerFormState, string>>
 
-export default function SellerForm() {
+interface SellerFormProps {
+  embedded?: boolean
+}
+
+export default function SellerForm({ embedded = false }: SellerFormProps) {
   const [form, setForm] = useState<SellerFormState>(initial)
   const [errors, setErrors] = useState<SellerErrors>({})
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
@@ -181,16 +185,21 @@ export default function SellerForm() {
         />
       </div>
 
-      <div>
-        <p className="t-eyebrow mb-6">Tell Us About Your Property</p>
-        <p className="t-body text-sm mb-8" style={{ lineHeight: '1.75' }}>
-          Share the basics, your timeline, and anything you think matters. We review each
-          submission with care and respond with options that fit the situation.
-        </p>
-      </div>
+      {!embedded ? (
+        <div>
+          <p className="t-eyebrow mb-6">Tell Us About Your Property</p>
+          <p className="t-body text-sm mb-8" style={{ lineHeight: '1.75' }}>
+            Share the basics, your timeline, and anything you think matters. We review each
+            submission with care and respond with options that fit the situation.
+          </p>
+        </div>
+      ) : null}
 
-      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
-        <p className="t-eyebrow mb-6">Contact Information</p>
+      <div className="border border-gunmetal bg-matte-black/35 p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <div className="mb-6">
+          <p className="t-eyebrow mb-2">Contact Information</p>
+          <p className="t-caption">How we should reach you if we need a quick clarification.</p>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField label="Full name" required error={errors.fullName}>
             <input className="form-field" name="fullName" value={form.fullName} onChange={updateField} />
@@ -224,8 +233,11 @@ export default function SellerForm() {
         </div>
       </div>
 
-      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
-        <p className="t-eyebrow mb-6">Property Details</p>
+      <div className="border border-gunmetal bg-matte-black/35 p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <div className="mb-6">
+          <p className="t-eyebrow mb-2">Property Details</p>
+          <p className="t-caption">The basics we need to understand the asset and the decision context.</p>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
             <FormField label="Property address" required error={errors.propertyAddress}>
@@ -315,8 +327,11 @@ export default function SellerForm() {
         </div>
       </div>
 
-      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
-        <p className="t-eyebrow mb-6">Condition And Context</p>
+      <div className="border border-gunmetal bg-matte-black/35 p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <div className="mb-6">
+          <p className="t-eyebrow mb-2">Condition And Context</p>
+          <p className="t-caption">Use this section for anything that affects repairs, timing, or follow-up.</p>
+        </div>
         <div className="space-y-4">
           <FormField
             label="What repairs or issues are you aware of?"
@@ -377,7 +392,7 @@ export default function SellerForm() {
 
       {status === 'error' ? (
         <div
-          className="border border-gunmetal p-4"
+          className="border border-gunmetal bg-matte-black/35 p-4"
           style={{ borderRadius: '2px', borderLeftColor: '#C0392B', borderLeftWidth: '3px' }}
         >
           <p className="t-body text-sm" style={{ color: '#C0392B' }}>
@@ -386,7 +401,7 @@ export default function SellerForm() {
         </div>
       ) : null}
 
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+      <div className="border-t border-gunmetal pt-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
         <button
           type="submit"
           disabled={status === 'submitting'}
@@ -394,9 +409,8 @@ export default function SellerForm() {
         >
           {status === 'submitting' ? 'Sending...' : 'Submit Property Intake'}
         </button>
-        <p className="t-caption">
-          Required fields are marked. We only use this information to review your situation and
-          follow up.
+        <p className="t-caption max-w-sm">
+          Required fields are marked. We only use this information to review your situation and follow up.
         </p>
       </div>
     </form>

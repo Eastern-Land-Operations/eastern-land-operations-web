@@ -15,6 +15,10 @@ import {
 type BuyerFormState = BuyerFormSubmission
 type BuyerErrors = Partial<Record<keyof BuyerFormState, string>>
 
+interface InvestorFormProps {
+  embedded?: boolean
+}
+
 const initial: BuyerFormState = {
   submissionType: 'investor',
   fullName: '',
@@ -39,7 +43,7 @@ const initial: BuyerFormState = {
   _hp: '',
 }
 
-export default function InvestorForm() {
+export default function InvestorForm({ embedded = false }: InvestorFormProps) {
   const [form, setForm] = useState<BuyerFormState>(initial)
   const [errors, setErrors] = useState<BuyerErrors>({})
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
@@ -124,8 +128,8 @@ export default function InvestorForm() {
         <div className="w-8 h-0.5 bg-olive mx-auto mb-8" />
         <h3 className="t-h3 text-lg mb-3">Buyer profile received.</h3>
         <p className="t-body text-sm max-w-md mx-auto mb-6">
-          Thank you. Your buyer profile has been received. Eastern Land Operations will review
-          your buy box and contact you when opportunities match your criteria.
+          Thank you. Your investor profile has been received. Eastern Land Operations will review
+          your criteria and contact you when opportunities are a strong fit.
         </p>
         <button
           onClick={() => setStatus('idle')}
@@ -150,16 +154,21 @@ export default function InvestorForm() {
         />
       </div>
 
-      <div>
-        <p className="t-eyebrow mb-6">Join the ELO Buyer Network</p>
-        <p className="t-body text-sm mb-8" style={{ lineHeight: '1.75' }}>
-          Tell us how you buy, what you buy, and how quickly you can move. We use this to match
-          real opportunities with real operators, investors, and capital partners.
-        </p>
-      </div>
+      {!embedded ? (
+        <div>
+          <p className="t-eyebrow mb-6">Investor Intake</p>
+          <p className="t-body text-sm mb-8" style={{ lineHeight: '1.75' }}>
+            Tell us what you buy, how you buy, and how quickly you can move. We use this to match
+            relevant opportunities with investors who are ready to act.
+          </p>
+        </div>
+      ) : null}
 
-      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
-        <p className="t-eyebrow mb-6">Buyer Profile</p>
+      <div className="border border-gunmetal bg-matte-black/35 p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <div className="mb-6">
+          <p className="t-eyebrow mb-2">Buyer Profile</p>
+          <p className="t-caption">Who you are, how you buy, and what kind of operator you are.</p>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField label="Full name" required error={errors.fullName}>
             <input className="form-field" name="fullName" value={form.fullName} onChange={updateField} />
@@ -194,14 +203,17 @@ export default function InvestorForm() {
         </div>
       </div>
 
-      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
-        <p className="t-eyebrow mb-6">Buy Box</p>
+      <div className="border border-gunmetal bg-matte-black/35 p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <div className="mb-6">
+          <p className="t-eyebrow mb-2">Investment Criteria</p>
+          <p className="t-caption">The clearer your criteria, the easier it is to share relevant opportunities.</p>
+        </div>
         <div className="space-y-6">
           <FormField
             label="What property types are you looking for?"
             required
             error={errors.propertyTypesWanted}
-            helper="Choose every category you actively want to review."
+            helper="Choose every category you actively want us to send you."
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {buyerPropertyTypes.map((option) => {
@@ -280,8 +292,11 @@ export default function InvestorForm() {
         </div>
       </div>
 
-      <div className="border border-gunmetal p-6 sm:p-8" style={{ borderRadius: '2px' }}>
-        <p className="t-eyebrow mb-6">Execution Capacity</p>
+      <div className="border border-gunmetal bg-matte-black/35 p-6 sm:p-8" style={{ borderRadius: '2px' }}>
+        <div className="mb-6">
+          <p className="t-eyebrow mb-2">Execution Capacity</p>
+          <p className="t-caption">This helps us separate broad interest from real buying readiness.</p>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField label="How quickly can you close?" error={errors.closeSpeed}>
             <input
@@ -333,7 +348,7 @@ export default function InvestorForm() {
             </select>
           </FormField>
           <div className="sm:col-span-2">
-            <FormField label="Notes about your buy box" error={errors.notes}>
+            <FormField label="Notes about your criteria" error={errors.notes}>
               <textarea className="form-field resize-y" name="notes" value={form.notes} onChange={updateField} rows={5} />
             </FormField>
           </div>
@@ -342,7 +357,7 @@ export default function InvestorForm() {
 
       {status === 'error' ? (
         <div
-          className="border border-gunmetal p-4"
+          className="border border-gunmetal bg-matte-black/35 p-4"
           style={{ borderRadius: '2px', borderLeftColor: '#C0392B', borderLeftWidth: '3px' }}
         >
           <p className="t-body text-sm" style={{ color: '#C0392B' }}>
@@ -351,7 +366,7 @@ export default function InvestorForm() {
         </div>
       ) : null}
 
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+      <div className="border-t border-gunmetal pt-6 flex flex-col sm:flex-row items-start sm:items-center gap-6">
         <button
           type="submit"
           disabled={status === 'submitting'}
@@ -359,7 +374,7 @@ export default function InvestorForm() {
         >
           {status === 'submitting' ? 'Sending...' : 'Submit Buyer Profile'}
         </button>
-        <p className="t-caption">
+        <p className="t-caption max-w-sm">
           Required fields are marked. We use this profile to match opportunities more accurately.
         </p>
       </div>

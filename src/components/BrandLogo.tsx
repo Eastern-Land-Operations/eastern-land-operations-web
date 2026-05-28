@@ -31,7 +31,7 @@ export default function BrandLogo({
       height={height}
       priority={priority}
       className={className}
-      style={{ objectFit: 'contain', width: 'auto', height: 'auto' }}
+      style={{ objectFit: 'contain', maxWidth: '100%', height: 'auto' }}
     />
   )
 }

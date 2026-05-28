@@ -9,7 +9,7 @@ const links = {
   ],
   engage: [
     { href: '/sell-your-property', label: 'Sell Your Property' },
-    { href: '/partner-with-us', label: 'Buyer Network' },
+    { href: '/partner-with-us', label: 'Investor Intake' },
     { href: '/contact', label: 'Contact' },
   ],
 }
@@ -19,7 +19,6 @@ export default function Footer() {
     <footer className="bg-graphite border-t border-gunmetal">
       <div className="max-w-screen-xl mx-auto px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Brand col */}
           <div className="md:col-span-2">
             <div className="mb-6">
               <BrandLogo
@@ -32,8 +31,7 @@ export default function Footer() {
               <p className="t-eyebrow mb-2">Eastern Land Operations</p>
             </div>
             <p className="t-body max-w-xs mb-8">
-              Strategic land operator with institutional discipline. Tactical acquisitions.
-              Redevelopment outcomes. Long-horizon ownership.
+              Real estate acquisitions, redevelopment, and long-term ownership with a disciplined local approach.
             </p>
             <div className="flex flex-col gap-3">
               <a
@@ -51,7 +49,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Company links */}
           <div>
             <p className="t-eyebrow mb-6">Company</p>
             <ul className="flex flex-col gap-3">
@@ -68,7 +65,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Engage links */}
           <div>
             <p className="t-eyebrow mb-6">Engage</p>
             <ul className="flex flex-col gap-3">
@@ -86,14 +82,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-gunmetal flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="t-caption text-slate/60">
             &copy; {new Date().getFullYear()} Eastern Land Operations, LLC. All rights reserved.
           </p>
-          <p className="t-id">
-            Strategic Land Operator
-          </p>
+          <p className="t-id">Real Estate Operations</p>
         </div>
       </div>
     </footer>

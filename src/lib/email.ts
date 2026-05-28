@@ -62,7 +62,7 @@ function section(title: string, rows: string): string {
 
 function buildEmailHtml(data: OutreachFormData): string {
   const typeLabels: Record<string, string> = {
-    'property-owner': 'Seller / Warm Lead Intake',
+    'property-owner': 'Seller Property Intake',
     'agent': 'Agent',
     'wholesaler': 'Wholesaler / Source Partner',
     'contractor': 'Contractor',

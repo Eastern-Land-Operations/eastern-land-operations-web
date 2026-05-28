@@ -4,72 +4,66 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Eastern Land Operations is a strategic land operator with institutional discipline. Long-horizon ownership. Redevelopment focus.',
+    'Eastern Land Operations is a real estate acquisitions and redevelopment company focused on thoughtful buying, improvement, and long-term ownership.',
 }
 
 const principles = [
   {
     id: '01',
-    title: 'Institutional discipline in a non-institutional space.',
-    body: 'The residential and small commercial land market is dominated by operators who move on instinct. We apply the same rigor as an institutional buyer — underwriting, pipeline tracking, field intelligence — to transactions that institutional capital ignores.',
+    title: 'Thoughtful decisions over rushed ones.',
+    body: 'We take time to understand the property, the neighborhood, and the owner’s situation before deciding what makes sense.',
   },
   {
     id: '02',
-    title: 'Long horizon over short cycle.',
-    body: 'We are not optimized for volume. We are optimized for position quality. Every acquisition is evaluated for its long-term trajectory, not just its near-term flip potential. This changes what we buy, how we hold it, and how we exit.',
+    title: 'Long-term thinking over quick volume.',
+    body: 'We are focused on quality opportunities, not just more activity. That affects what we buy, how we improve it, and whether we hold or sell.',
   },
   {
     id: '03',
-    title: 'Subtraction over addition.',
-    body: 'Most operators add complexity — more deals, more partners, more overhead. We subtract. Cleaner operations. Fewer but better acquisitions. Every element of the system exists because it earns its place.',
+    title: 'Simple systems over unnecessary complexity.',
+    body: 'Clear communication, organized processes, and practical execution matter more than noise. We try to keep the process straightforward for everyone involved.',
   },
   {
     id: '04',
-    title: 'Field credibility is non-negotiable.',
-    body: 'We walk properties. We read neighborhoods. We develop our own site intelligence — not from data portals, but from boots-on-the-ground observation. You cannot underwrite what you have not seen.',
+    title: 'Local knowledge matters.',
+    body: 'We visit properties, study neighborhoods, and rely on direct observation instead of making assumptions from a distance.',
   },
   {
     id: '05',
-    title: 'Redevelopment as an outcome, not a renovation.',
-    body: 'We do not flip houses. We reposition assets. The distinction is material. Every redevelopment decision starts with the exit and works backward through the scope. Nothing is done cosmetically. Everything is structural.',
+    title: 'Improvement should serve a real outcome.',
+    body: 'We focus on improvements that make a property more useful, more stable, and better positioned for the next stage of ownership or sale.',
   },
-]
+] as const
 
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
       <section className="pt-32 pb-24 bg-matte-black border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="max-w-2xl">
             <p className="t-eyebrow mb-8">About</p>
             <div className="section-rule" />
-            <h1 className="t-h1 mb-8" style={{ fontSize: 'clamp(32px, 4vw, 52px)' }}>
-              Eastern Land Operations.
-            </h1>
-            <p className="t-body mb-6" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-              Eastern Land Operations is a tactical acquisitions operator focused on land and
-              property redevelopment in the Greater Philadelphia region and surrounding markets.
+            <h1 className="t-h1 mb-8">Eastern Land Operations.</h1>
+            <p className="t-body mb-6">
+              Eastern Land Operations is a real estate acquisitions and redevelopment company
+              focused on land and property opportunities in the Greater Philadelphia region and
+              surrounding markets.
             </p>
-            <p className="t-body" style={{ fontSize: '15px', lineHeight: '1.7' }}>
-              We are not a real estate agency. We are not a wholesaling operation. We are an
-              operational entity — structured, disciplined, and built for long-horizon ownership.
-              Every acquisition is a position. Every position is held until the right outcome.
+            <p className="t-body">
+              We are not a real estate agency. We buy, improve, and manage property with a
+              disciplined long-term approach. Every property is evaluated carefully, and every
+              next step is chosen with intention.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Position statement */}
       <section className="bg-graphite py-20 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="border border-gunmetal p-12 max-w-3xl" style={{ borderRadius: '2px' }}>
             <p className="t-eyebrow mb-6">Position Statement</p>
             <div className="section-rule" />
-            <blockquote
-              className="t-display"
-              style={{ fontSize: 'clamp(24px, 3vw, 36px)' }}
-            >
+            <blockquote className="t-display" style={{ fontSize: 'clamp(24px, 3vw, 36px)' }}>
               &ldquo;Strategic land operator
               <br />
               with institutional discipline.&rdquo;
@@ -78,36 +72,32 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Operating Principles */}
       <section className="bg-matte-black py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
-          <p className="t-eyebrow mb-6">Operating Principles</p>
+          <p className="t-eyebrow mb-6">How We Work</p>
           <div className="section-rule" />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <h2 className="t-h2 text-2xl">
-              The posture behind every decision.
-            </h2>
-            <p className="t-body" style={{ fontSize: '15px' }}>
-              These are not values statements. They are operational constraints — rules that
-              govern how we source, acquire, redevelop, and hold. They exist because we have
-              seen what happens when they are violated.
+            <h2 className="t-h2">The approach behind every decision.</h2>
+            <p className="t-body">
+              These are the working principles behind how we review opportunities, make
+              decisions, and manage property over time.
             </p>
           </div>
 
           <div className="flex flex-col gap-0 border border-gunmetal" style={{ borderRadius: '2px' }}>
-            {principles.map((p, i) => (
+            {principles.map((item, index) => (
               <div
-                key={p.id}
+                key={item.id}
                 className={`grid grid-cols-1 lg:grid-cols-4 gap-8 p-8 ${
-                  i < principles.length - 1 ? 'border-b border-gunmetal' : ''
+                  index < principles.length - 1 ? 'border-b border-gunmetal' : ''
                 }`}
               >
                 <div className="lg:col-span-1">
-                  <p className="t-id mb-2">{p.id}</p>
-                  <h3 className="t-h3 text-sm leading-snug">{p.title}</h3>
+                  <p className="t-id mb-2">{item.id}</p>
+                  <h3 className="t-h3 text-sm leading-snug">{item.title}</h3>
                 </div>
                 <div className="lg:col-span-3">
-                  <p className="t-body">{p.body}</p>
+                  <p className="t-body">{item.body}</p>
                 </div>
               </div>
             ))}
@@ -115,22 +105,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Is / Is Not */}
       <section className="bg-graphite py-24 border-b border-gunmetal">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <p className="t-eyebrow mb-6">ELO Is</p>
+              <p className="t-eyebrow mb-6">What We Are</p>
               <div className="section-rule" />
               <ul className="flex flex-col gap-0 border-t border-gunmetal">
                 {[
-                  'Strategic land operator',
-                  'Institutional discipline',
-                  'Redevelopment focus',
-                  'Long-horizon ownership',
-                  'Operational precision',
-                  'Field credibility',
-                ].map(item => (
+                  'Disciplined buyers',
+                  'Long-term owners',
+                  'Hands-on problem solvers',
+                  'Redevelopment-minded',
+                  'Locally informed',
+                  'Direct and practical',
+                ].map((item) => (
                   <li key={item} className="t-h3 text-sm py-5 border-b border-gunmetal">
                     {item}
                   </li>
@@ -138,17 +127,17 @@ export default function AboutPage() {
               </ul>
             </div>
             <div>
-              <p className="t-eyebrow mb-6" style={{ color: 'var(--slate)' }}>ELO Is Not</p>
+              <p className="t-eyebrow mb-6" style={{ color: 'var(--slate)' }}>What We Are Not</p>
               <div className="section-rule" style={{ background: 'var(--gunmetal)' }} />
               <ul className="flex flex-col gap-0 border-t border-gunmetal">
                 {[
                   'A real estate agency',
-                  'A wholesaling operation',
-                  'A startup brand',
-                  'A luxury property developer',
+                  'A high-pressure sales operation',
                   'A high-volume flipper',
-                  'An outdoors company',
-                ].map(item => (
+                  'A generic property brand',
+                  'A one-size-fits-all buyer',
+                  'A business built on noise',
+                ].map((item) => (
                   <li
                     key={item}
                     className="t-body py-5 border-b border-gunmetal"
@@ -163,15 +152,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="bg-matte-black py-20">
         <div className="max-w-screen-xl mx-auto px-8">
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/operations" className="btn-primary">
-              View Operations Model
+              View How We Work
             </Link>
             <Link href="/contact" className="btn-secondary">
-              Make Contact
+              Get In Touch
             </Link>
           </div>
         </div>
