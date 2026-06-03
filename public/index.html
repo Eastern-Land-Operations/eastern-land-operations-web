@@ -80,6 +80,28 @@
       letter-spacing: -.02em;
     }
     .ops-desc { font-size: 13px; line-height: 1.9; color: rgba(244,241,236,.45); font-weight: 300; }
+    .ops-proof-strip {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      border-bottom: 1px solid rgba(244,241,236,.07);
+      border-top: 1px solid rgba(244,241,236,.07);
+    }
+    .ops-proof-item {
+      min-height: 190px;
+      padding: 28px 24px;
+      border-right: 1px solid rgba(244,241,236,.07);
+      display: flex; flex-direction: column;
+    }
+    .ops-proof-item:last-child { border-right: none; }
+    .opi-n { font-size: 10px; color: rgba(244,241,236,.22); margin-bottom: 36px; }
+    .opi-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 300;
+      color: var(--cream); margin-bottom: 12px;
+    }
+    .opi-desc {
+      font-size: 11px; line-height: 1.7;
+      color: rgba(244,241,236,.38); font-weight: 300;
+    }
 
     /* ── GRIDIRON ──────────────────────────────── */
     .gridiron-section { padding: 160px 56px; background: var(--cream); }
@@ -188,6 +210,9 @@
       .hero-bottom { grid-template-columns: 1fr; }
       .philosophy, .gridiron-section, .port-section, .closing { padding-left: 24px; padding-right: 24px; }
       .ops-header { padding: 80px 24px 48px; grid-template-columns: 1fr; }
+      .ops-proof-strip { grid-template-columns: 1fr; }
+      .ops-proof-item { border-right: none; border-bottom: 1px solid rgba(244,241,236,.07); min-height: 0; }
+      .ops-proof-item:last-child { border-bottom: none; }
       .port-cats { grid-template-columns: 1fr 1fr; }
       .g-factors { grid-template-columns: 1fr; }
       .g-factor:nth-child(odd) { border-right: none; padding-right: 0; }
@@ -197,6 +222,10 @@
     }
     @media (max-width: 1080px) {
       .ops-header { grid-template-columns: 1fr; }
+      .ops-proof-strip { grid-template-columns: repeat(2, 1fr); }
+      .ops-proof-item:nth-child(even) { border-right: none; }
+      .ops-proof-item { border-bottom: 1px solid rgba(244,241,236,.07); }
+      .ops-proof-item:nth-last-child(-n+2) { border-bottom: none; }
       .port-header { grid-template-columns: 1fr; gap: 32px; }
       .port-cats { grid-template-columns: repeat(3, 1fr); }
       .g-inner { grid-template-columns: 1fr; }
@@ -291,6 +320,39 @@
       <p class="ops-desc">Three disciplines. One operating company. Every property we touch is evaluated, improved, and managed against a standard set in the first day of ownership and held for the life of the asset.</p>
       <br><br>
       <a href="operations.html" class="arrow-link" style="margin-top:24px">Our Methodology <span class="line"></span></a>
+    </div>
+  </div>
+
+  <div class="ops-proof-strip">
+    <div class="ops-proof-item fu">
+      <div class="opi-n">01</div>
+      <div class="opi-name">Source</div>
+      <p class="opi-desc">Direct owner conversations, referrals, public records, contractor intelligence, and local field observation.</p>
+    </div>
+    <div class="ops-proof-item fu d1">
+      <div class="opi-n">02</div>
+      <div class="opi-name">Underwrite</div>
+      <p class="opi-desc">ARV, rent potential, repair budget, MAO, DSCR, financing cost, and downside stress before action.</p>
+    </div>
+    <div class="ops-proof-item fu d2">
+      <div class="opi-n">03</div>
+      <div class="opi-name">Verify</div>
+      <p class="opi-desc">In-person condition review, systems, access, layout, scope, seller situation, and block context.</p>
+    </div>
+    <div class="ops-proof-item fu d3">
+      <div class="opi-n">04</div>
+      <div class="opi-name">Structure</div>
+      <p class="opi-desc">Cash, private capital, seller financing, installment sale, JV, or conventional financing when appropriate.</p>
+    </div>
+    <div class="ops-proof-item fu">
+      <div class="opi-n">05</div>
+      <div class="opi-name">Execute</div>
+      <p class="opi-desc">Title, legal, close, contractor mobilization, line-item scope, schedule, and budget control.</p>
+    </div>
+    <div class="ops-proof-item fu d1">
+      <div class="opi-n">06</div>
+      <div class="opi-name">Stabilize</div>
+      <p class="opi-desc">Hold, refinance, lease-up, sell, or selectively dispose based on the original underwriting.</p>
     </div>
   </div>
 

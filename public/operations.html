@@ -17,6 +17,34 @@
     }
     .ops-body { font-size: 14px; line-height: 1.95; color: var(--mid-gray); font-weight: 300; }
     .ops-body p + p { margin-top: 20px; }
+    .ops-snapshot {
+      background: var(--ink);
+      border-top: 1px solid rgba(244,241,236,.07);
+      border-bottom: 1px solid rgba(244,241,236,.07);
+    }
+    .snapshot-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .snapshot-item {
+      min-height: 220px;
+      padding: 34px 32px;
+      border-right: 1px solid rgba(244,241,236,.07);
+    }
+    .snapshot-item:last-child { border-right: none; }
+    .snapshot-k {
+      font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 28px;
+    }
+    .snapshot-v {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px; font-weight: 300;
+      color: var(--cream); line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .snapshot-d {
+      font-size: 11px; line-height: 1.75;
+      color: rgba(244,241,236,.42); font-weight: 300;
+    }
 
     .discipline-section { background: var(--ink); }
     .disc-block {
@@ -161,6 +189,10 @@
 
     @media (max-width: 1080px) {
       .ops-intro-grid, .disc-block, .sequence-head, .cta-band { grid-template-columns: 1fr; }
+      .snapshot-grid { grid-template-columns: 1fr 1fr; }
+      .snapshot-item { border-bottom: 1px solid rgba(244,241,236,.07); }
+      .snapshot-item:nth-child(even) { border-right: none; }
+      .snapshot-item:nth-last-child(-n+2) { border-bottom: none; }
       .disc-block:nth-child(even) .disc-visual,
       .disc-block:nth-child(even) .disc-content { order: unset; }
       .disc-visual { min-height: 300px; }
@@ -176,6 +208,13 @@
     }
     @media (max-width: 720px) {
       .ops-intro, .sequence-section, .criteria-section, .cta-band { padding-left: 24px; padding-right: 24px; }
+      .snapshot-grid { grid-template-columns: 1fr; }
+      .snapshot-item,
+      .snapshot-item:nth-child(even) {
+        border-right: none;
+        border-bottom: 1px solid rgba(244,241,236,.07);
+      }
+      .snapshot-item:last-child { border-bottom: none; }
       .disc-content { padding: 48px 24px; }
       .sequence-grid, .proof-grid { grid-template-columns: 1fr; }
       .seq-card,
@@ -227,6 +266,31 @@
       <p>Eastern Land Operations approaches real estate from the inside out. We do not acquire and then figure out operations. We design operations first — and then we acquire into that model.</p>
       <p>This means every property is evaluated not just for its current condition or market price, but for its operational profile over the next ten to twenty years. Maintenance requirements. Tenant composition. Capital improvement cycles. Community context. These factors shape whether we buy, not just whether the numbers work on day one.</p>
       <p>We are a small, deliberate company. We do not pursue scale for its own sake. We pursue quality — in the assets we own, in the way we manage them, and in the relationships we build in every neighborhood we operate in.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ops-snapshot">
+  <div class="snapshot-grid">
+    <div class="snapshot-item fu">
+      <div class="snapshot-k">Numbers First</div>
+      <div class="snapshot-v">Underwrite before the walk.</div>
+      <p class="snapshot-d">ARV, rent potential, repair budget, MAO, DSCR, financing cost, carrying cost, exit cost, and downside stress are reviewed before capital is committed.</p>
+    </div>
+    <div class="snapshot-item fu d1">
+      <div class="snapshot-k">Field Verified</div>
+      <div class="snapshot-v">No remote assumptions.</div>
+      <p class="snapshot-d">Condition, systems, layout, access, scope, seller situation, and block-level context are checked in person before the model is trusted.</p>
+    </div>
+    <div class="snapshot-item fu d2">
+      <div class="snapshot-k">Structured Carefully</div>
+      <div class="snapshot-v">The deal shape matters.</div>
+      <p class="snapshot-d">Cash, private capital, seller financing, installment sale, joint venture, or conventional financing are evaluated against seller dignity, asset risk, and capital protection.</p>
+    </div>
+    <div class="snapshot-item fu d3">
+      <div class="snapshot-k">Execution Tracked</div>
+      <div class="snapshot-v">Close, improve, stabilize.</div>
+      <p class="snapshot-d">Title, legal, closing, contractors, line-item scope, schedule, budget, refinance, lease-up, disposition, and hold strategy are managed as one operating circuit.</p>
     </div>
   </div>
 </section>
