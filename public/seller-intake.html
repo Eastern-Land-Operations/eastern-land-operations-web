@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell A Property — Eastern Land Operations</title>
+  <meta name="description" content="Submit a property to Eastern Land Operations. We are a direct buyer — we close, operate, and hold what we purchase.">
+  <link rel="stylesheet" href="css/site.css">
+  <style>
+    body { background: var(--cream); }
+    .intake-page { min-height: 100vh; }
+    .intake-header {
+      background: var(--ink); padding: 160px 56px 80px;
+      position: relative; overflow: hidden;
+    }
+    .intake-header::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(244,241,236,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244,241,236,.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .intake-header-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+    }
+    .intake-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 300; color: var(--cream);
+      letter-spacing: -.025em; line-height: .95;
+    }
+    .intake-header-desc {
+      font-size: 13px; color: rgba(244,241,236,.45);
+      font-weight: 300; line-height: 1.9;
+    }
+    .intake-header-desc p + p { margin-top: 16px; }
+
+    .intake-body { padding: 80px 56px 120px; }
+    .intake-wrap { max-width: 800px; }
+
+    .intake-notice {
+      padding: 28px 32px; border-left: 2px solid var(--accent);
+      background: var(--pale); margin-bottom: 64px;
+    }
+    .intake-notice p { font-size: 13px; line-height: 1.8; color: var(--mid-gray); font-weight: 300; }
+    .intake-notice strong { font-weight: 500; color: var(--ink); }
+
+    .form-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 300;
+      color: var(--ink); letter-spacing: -.01em;
+      margin-bottom: 36px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .intake-section { margin-bottom: 64px; }
+    .form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+    .form-group { margin-bottom: 36px; }
+    .form-group.span-2 { grid-column: 1 / -1; }
+
+    .submit-section { margin-top: 16px; padding-top: 48px; border-top: 1px solid var(--light-gray); }
+    .submit-row { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+    .submit-note { font-size: 11px; color: var(--warm-gray); font-weight: 300; line-height: 1.7; max-width: 400px; }
+    .submit-btn {
+      background: var(--ink); color: var(--cream);
+      border: none; padding: 18px 48px;
+      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      font-weight: 400; transition: background .2s; white-space: nowrap;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .submit-btn:hover { background: var(--mid-gray); }
+
+    .success-state {
+      display: none; padding: 48px 40px;
+      background: var(--ink); color: var(--cream);
+    }
+    .success-state h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 300; margin-bottom: 16px;
+    }
+    .success-state p { font-size: 13px; color: rgba(244,241,236,.55); line-height: 1.8; font-weight: 300; }
+
+    @media (max-width: 1080px) {
+      .intake-header-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 720px) {
+      .intake-header { padding: 140px 24px 60px; }
+      .intake-body { padding: 56px 24px 80px; }
+      .form-2col { grid-template-columns: 1fr; }
+      .form-group.span-2 { grid-column: 1; }
+    }
+  </style>
+</head>
+<body class="intake-page">
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="elo" viewBox="24 97 163 101">
+    <path fill="currentColor" d="m 25.86256,195.28919 c -0.169,-0.90872 -0.24464,-1.75355 -0.16809,-1.8774 0.0766,-0.12386 0.44523,-0.22519 0.81931,-0.22519 1.17913,0 6.56806,-1.30761 8.31595,-2.01784 3.81153,-1.54877 5.25006,-2.41336 8.57199,-5.15199 3.51493,-2.89774 4.83822,-4.70312 9.87143,-13.46767 2.79648,-4.86965 4.6105,-8.01663 6.82582,-11.84154 0.82131,-1.41804 2.41401,-4.1856 3.53934,-6.15013 3.26914,-5.70706 5.75373,-10.02496 9.51536,-16.53645 1.93352,-3.34698 4.42734,-7.67758 5.54182,-9.62356 1.11448,-1.94597 2.13586,-3.55331 2.26974,-3.57187 0.13388,-0.0186 1.28143,1.81173 2.5501,4.0673 1.26867,2.25557 2.38734,4.0781 2.48594,4.05005 0.16677,-0.0474 4.29888,-7.16244 9.18995,-15.82401 1.15043,-2.03729 2.48134,-4.35901 2.95758,-5.15937 0.47623,-0.80037 1.80316,-3.12208 2.94873,-5.15938 3.72911,-6.6319 3.74046,-6.65082 3.88812,-6.48008 0.16477,0.19052 1.84404,3.07306 4.16041,7.14154 1.1185,1.96453 2.98951,5.23875 4.1578,7.27604 1.16829,2.0373 3.31374,5.78776 4.76767,8.33438 4.93288,8.64013 5.75279,10.01628 5.88829,9.88302 0.0744,-0.0732 1.15273,-1.93985 2.39625,-4.14815 1.24352,-2.20829 2.36809,-4.01508 2.49906,-4.01508 0.13097,0 0.85267,1.07156 1.6038,2.38125 1.82875,3.18868 4.88608,8.49534 7.31687,12.7 1.09366,1.89177 3.59621,6.23755 5.56121,9.65729 1.96501,3.41974 4.20286,7.28927 4.973,8.59896 2.25375,3.83266 7.97062,13.81915 10.37524,18.12396 4.12867,7.39121 9.60905,12.35524 16.50682,14.95155 2.13224,0.80257 5.81222,1.7138 7.72616,1.91313 l 1.40852,0.1467 -0.17089,1.35004 c -0.32386,2.55848 -0.1629,2.46458 -3.4399,2.00696 -10.81465,-1.51021 -23.70916,-4.5066 -33.57105,-7.80115 -2.45678,-0.82073 -5.49288,-1.79175 -6.74687,-2.15782 -1.254,-0.36607 -3.2325,-0.94306 -4.39667,-1.2822 -10.32812,-3.00872 -22.36745,-4.55093 -33.3375,-4.27048 -7.05876,0.18047 -9.6551,0.42333 -16.00729,1.49733 -8.43474,1.42611 -13.11488,2.64327 -24.07708,6.26167 -5.05026,1.66699 -8.16093,2.55256 -14.2875,4.0675 -5.26927,1.30295 -16.8873,3.48746 -20.38765,3.83345 l -1.73453,0.17145 z m 26.13361,-7.1552 c 2.94379,-0.78126 5.05571,-1.4763 16.71209,-5.50003 11.24495,-3.8817 20.20271,-5.70406 31.64051,-6.43692 8.99127,-0.5761 19.60627,0.53017 30.09635,3.13659 4.67269,1.161 8.30686,2.32851 17.19792,5.52497 2.32833,0.83707 4.76912,1.67805 5.42396,1.86885 5.20594,1.51678 9.65877,2.7094 9.75535,2.61282 0.0638,-0.0638 -0.46531,-0.62347 -1.17582,-1.2437 -2.91895,-2.54805 -5.28971,-5.47606 -7.12569,-8.8006 -1.54826,-2.80353 -12.4911,-22.01867 -13.48566,-23.6802 -0.47908,-0.80037 -1.64257,-2.82443 -2.58552,-4.49792 -0.94296,-1.67349 -2.60546,-4.59052 -3.69446,-6.48229 -1.08899,-1.89177 -2.77895,-4.83857 -3.75548,-6.54844 -0.97652,-1.70987 -1.87831,-3.10885 -2.00398,-3.10885 -0.12566,0 -1.32465,1.97487 -2.66441,4.3886 -2.02596,3.65 -2.49487,4.32908 -2.78612,4.0349 -0.19261,-0.19454 -1.62592,-2.6159 -3.18514,-5.38079 -1.55922,-2.7649 -4.31647,-7.64646 -6.12722,-10.84792 -1.81075,-3.20146 -4.61221,-8.17232 -6.22547,-11.04635 -1.61326,-2.87404 -2.99926,-5.2249 -3.08002,-5.22413 -0.0808,7.6e-4 -1.80066,2.94756 -3.82201,6.54843 -4.51415,8.04157 -11.1982,19.90217 -13.26356,23.53569 -0.84446,1.48564 -1.61567,2.65153 -1.71381,2.59088 -0.0981,-0.0607 -1.27875,-2.02031 -2.6236,-4.35479 -1.34485,-2.33449 -2.52522,-4.24332 -2.62305,-4.24184 -0.14092,0.002 -5.92505,9.90844 -9.86495,16.89542 -0.38019,0.67422 -1.58335,2.77367 -2.67368,4.66544 -5.45121,9.45803 -12.37778,21.59441 -12.37778,21.68769 0,0.0579 -0.38452,0.73826 -0.85449,1.51191 -1.64665,2.71068 -3.70611,5.31559 -5.78227,7.31372 -1.15197,1.10868 -2.09449,2.10006 -2.09449,2.20307 0,0.10301 0.38695,0.0739 0.85989,-0.0647 0.47294,-0.1386 2.22912,-0.61537 3.90261,-1.05951 z m 9.26041,-8.57815 c 0,-0.14405 0.88437,-1.69577 4.2949,-7.53591 0.72235,-1.23692 2.89444,-4.98739 4.82687,-8.33437 1.93243,-3.34698 4.14067,-7.15698 4.90719,-8.46667 1.42331,-2.43187 4.98825,-8.62014 5.45129,-9.46272 0.20976,-0.3817 0.72954,0.37868 2.84863,4.16719 1.42562,2.54874 2.67007,4.63136 2.76544,4.62804 0.0954,-0.003 0.98124,-1.46184 1.9686,-3.24115 0.98737,-1.77931 2.72268,-4.84245 3.85624,-6.80698 1.13356,-1.96453 3.16079,-5.47688 4.50496,-7.80521 1.34416,-2.32833 2.52589,-4.31696 2.62606,-4.41917 0.10016,-0.10222 0.14711,1.9576 0.10433,4.57738 l -0.0778,4.76321 -1.92528,3.36013 c -3.95073,6.89509 -5.76026,10.15926 -5.67738,10.24134 0.0469,0.0465 1.39501,-0.0799 2.99573,-0.2809 1.60073,-0.20097 3.29737,-0.36928 3.77032,-0.37401 l 0.85989,-0.009 v 2.22571 2.2257 l -0.99218,0.1536 c -0.54571,0.0845 -2.30188,0.27685 -3.90261,0.4275 -2.6861,0.2528 -5.69936,0.69395 -5.82949,0.85345 -0.17844,0.21873 -2.58482,4.32355 -3.43643,5.86187 l -1.01084,1.82595 0.72487,-0.18193 c 1.48052,-0.37158 9.63485,-1.50173 11.99929,-1.66303 l 2.44739,-0.16696 v 2.28382 c 0,2.61332 0.23687,2.40443 -3.04271,2.6834 -5.06468,0.43082 -13.47864,1.90015 -18.38854,3.2112 -4.62679,1.23546 -14.94582,4.53175 -16.20573,5.17672 -0.25466,0.13037 -0.46302,0.167 -0.46302,0.0814 z m 13.16502,-9.15951 c 1.56325,-0.45643 3.03273,-0.92728 3.2655,-1.04635 0.46179,-0.23621 4.618,-7.32598 4.41417,-7.5298 -0.1298,-0.1298 -4.5866,0.97078 -5.80116,1.43255 -0.66025,0.25103 -1.11856,0.96031 -4.25456,6.58439 -0.426,0.76398 -0.70517,1.38906 -0.62039,1.38906 0.0848,0 1.43319,-0.37343 2.99644,-0.82985 z m 6.89264,-13.07023 1.36828,-0.40634 -0.6588,-1.04361 c -0.36234,-0.57399 -0.6588,-1.17497 -0.6588,-1.33551 0,-0.64866 -0.59599,-0.0201 -1.46126,1.541 -1.0447,1.8849 -0.96948,1.95126 1.41058,1.24446 z m 66.72568,22.11855 c -0.7661,-0.44805 -10.10857,-3.47714 -14.75359,-4.78352 -2.58131,-0.72598 -4.72502,-1.40888 -4.7638,-1.51756 -0.0831,-0.233 -1.12338,-2.05821 -7.99928,-14.03553 l -5.15938,-8.98726 -0.0708,6.62178 -0.0708,6.62178 -1.78132,-0.16824 c -0.97972,-0.0925 -2.0492,-0.16908 -2.37662,-0.17012 l -0.59532,-0.002 0.003,-15.54427 0.003,-15.54427 1.88595,3.30729 c 10.51653,18.44233 10.91792,19.13116 11.16377,19.15793 0.12307,0.0134 1.3178,-1.94017 2.65495,-4.34126 1.33716,-2.4011 2.52906,-4.36563 2.64868,-4.36563 0.18669,0 2.83779,4.46041 8.49192,14.2875 0.75355,1.30969 2.89629,5.00063 4.76166,8.20208 1.86536,3.20146 3.94648,6.77334 4.6247,7.9375 0.67823,1.16417 1.44786,2.44409 1.7103,2.84427 0.48223,0.73532 0.34915,0.90435 -0.37744,0.47941 z m -9.525,-8.33564 c 0,-0.15115 -0.9685,-1.86838 -1.72458,-3.05783 -0.32376,-0.50932 -2.22185,-3.8133 -4.21798,-7.34218 -1.99613,-3.52888 -3.70808,-6.41498 -3.80432,-6.41354 -0.0962,0.001 -0.745,1.06816 -1.44168,2.3705 l -1.26667,2.3679 2.87643,5.10398 c 3.21725,5.70872 2.44787,4.9973 6.93296,6.41079 2.02156,0.63709 2.64584,0.76932 2.64584,0.56038 z m -16.27188,1.16328 c -5.24119,-0.92755 -9.35121,-1.35352 -14.48594,-1.50136 l -5.22552,-0.15045 v -22.19527 -22.19527 l 1.12448,-1.97302 c 0.61847,-1.08517 1.19254,-1.9743 1.27573,-1.97584 0.0832,-0.002 0.64874,0.86668 1.25677,1.92939 l 1.10552,1.93219 v 19.89593 19.89593 l 0.59532,6.4e-4 c 2.61319,0.003 11.81743,0.99549 13.88114,1.49708 0.39308,0.0955 0.95046,0.80843 1.69398,2.1666 0.60948,1.11332 1.28228,2.29211 1.49511,2.61953 0.21284,0.32742 0.28399,0.57885 0.15811,0.55874 -0.12588,-0.0201 -1.41949,-0.24729 -2.8747,-0.50482 z"/>
+  </symbol>
+</svg>
+
+<nav class="site-nav" id="nav">
+  <a href="index.html" class="nav-logo" aria-label="Eastern Land Operations">
+    <img src="brand/elo-logo-white.png" alt="" height="30">
+  </a>
+  <ul class="nav-links">
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="operations.html">Operations</a></li>
+    <li><a href="gridiron.html">Gridiron™</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="intake-header">
+  <div class="intake-header-inner">
+    <h1>Submit<br>A Property.</h1>
+    <div class="intake-header-desc">
+      <p>Eastern Land Operations purchases residential, multifamily, commercial, and land assets directly. We are not a wholesaler. We close what we contract, and we operate what we buy.</p>
+      <p>Complete the form below and we will review your submission within two business days. All information is held in strict confidence.</p>
+    </div>
+  </div>
+</div>
+
+<div class="intake-body">
+  <div class="intake-wrap">
+
+    <div class="intake-notice">
+      <p><strong>Who we buy from:</strong> Individual owners, estate representatives, and small investors looking for a direct, professional buyer. We are not a fix-and-flip operation and we do not assign contracts. If we make an offer, we intend to close and hold.</p>
+    </div>
+
+    <form id="sellerForm" novalidate>
+
+      <!-- Property Information -->
+      <div class="intake-section">
+        <div class="form-section-title">Property Information</div>
+        <div class="form-2col">
+          <div class="form-group span-2">
+            <label class="form-label" for="prop-address">Property Address *</label>
+            <input class="form-input" type="text" id="prop-address" name="prop_address" placeholder="Street address" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prop-city">City</label>
+            <input class="form-input" type="text" id="prop-city" name="prop_city" placeholder="Philadelphia">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prop-zip">Zip Code</label>
+            <input class="form-input" type="text" id="prop-zip" name="prop_zip" placeholder="19103">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prop-type">Property Type *</label>
+            <select class="form-select" id="prop-type" name="prop_type" required>
+              <option value="" disabled selected>Select type</option>
+              <option>Single-Family Residential</option>
+              <option>Duplex / Triplex</option>
+              <option>Small Multifamily (4–12 units)</option>
+              <option>Large Multifamily (13+ units)</option>
+              <option>Mixed-Use</option>
+              <option>Commercial</option>
+              <option>Vacant Land</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prop-beds">Bedrooms / Units</label>
+            <input class="form-input" type="text" id="prop-beds" name="prop_beds" placeholder="e.g. 3 bed / 4 units">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prop-sqft">Approximate Square Footage</label>
+            <input class="form-input" type="text" id="prop-sqft" name="prop_sqft" placeholder="e.g. 1,800 sq ft">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prop-year">Year Built (if known)</label>
+            <input class="form-input" type="text" id="prop-year" name="prop_year" placeholder="e.g. 1940">
+          </div>
+        </div>
+      </div>
+
+      <!-- Property Condition -->
+      <div class="intake-section">
+        <div class="form-section-title">Condition &amp; Occupancy</div>
+        <div class="form-2col">
+          <div class="form-group">
+            <label class="form-label" for="prop-condition">Overall Condition</label>
+            <select class="form-select" id="prop-condition" name="prop_condition">
+              <option value="" disabled selected>Select condition</option>
+              <option>Good — move-in or rent-ready</option>
+              <option>Fair — cosmetic work needed</option>
+              <option>Needs Work — moderate renovation</option>
+              <option>Full Rehab — significant renovation needed</option>
+              <option>Teardown / Land Value</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prop-occupancy">Occupancy Status</label>
+            <select class="form-select" id="prop-occupancy" name="prop_occupancy">
+              <option value="" disabled selected>Select status</option>
+              <option>Owner-occupied</option>
+              <option>Tenant-occupied (current leases)</option>
+              <option>Partially occupied</option>
+              <option>Vacant</option>
+            </select>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label" for="prop-condition-notes">Additional Condition Notes</label>
+            <textarea class="form-textarea" id="prop-condition-notes" name="prop_condition_notes" placeholder="Describe any known issues, recent repairs, or major systems (roof, HVAC, plumbing, electric)…" rows="4"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seller Situation -->
+      <div class="intake-section">
+        <div class="form-section-title">Your Situation</div>
+        <div class="form-2col">
+          <div class="form-group">
+            <label class="form-label" for="asking-price">Asking Price (if known)</label>
+            <input class="form-input" type="text" id="asking-price" name="asking_price" placeholder="e.g. $185,000 or 'open to offers'">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="timeline">Desired Timeline</label>
+            <select class="form-select" id="timeline" name="timeline">
+              <option value="" disabled selected>Select timeline</option>
+              <option>ASAP — within 30 days</option>
+              <option>30–60 days</option>
+              <option>60–90 days</option>
+              <option>90+ days / flexible</option>
+              <option>Not decided yet</option>
+            </select>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label" for="motivation">What Is Prompting the Sale?</label>
+            <textarea class="form-textarea" id="motivation" name="motivation" placeholder="We ask this not to judge, but to understand. Estate settlement, financial hardship, relocation, retirement — sharing context helps us structure the right offer…" rows="4"></textarea>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label">What Matters Most in This Sale?</label>
+            <div class="checkbox-group">
+              <label class="checkbox-item"><input type="checkbox" name="priority" value="price"><div class="checkbox-box"></div><span class="checkbox-text">Getting the highest possible price</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="priority" value="certainty"><div class="checkbox-box"></div><span class="checkbox-text">Certainty — a buyer who will actually close</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="priority" value="speed"><div class="checkbox-box"></div><span class="checkbox-text">Speed — a quick, clean close</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="priority" value="tenants"><div class="checkbox-box"></div><span class="checkbox-text">Tenant protection — the current residents remain housed</span></label>
+              <label class="checkbox-item"><input type="checkbox" name="priority" value="privacy"><div class="checkbox-box"></div><span class="checkbox-text">Privacy — no listing, no public exposure</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="intake-section">
+        <div class="form-section-title">Your Contact Information</div>
+        <div class="form-2col">
+          <div class="form-group">
+            <label class="form-label" for="seller-name">Your Name *</label>
+            <input class="form-input" type="text" id="seller-name" name="seller_name" required placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="seller-role">Your Role</label>
+            <select class="form-select" id="seller-role" name="seller_role">
+              <option value="" disabled selected>Select role</option>
+              <option>Owner</option>
+              <option>Estate Representative / Executor</option>
+              <option>Attorney</option>
+              <option>Agent / Broker (representing seller)</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="seller-email">Email Address *</label>
+            <input class="form-input" type="email" id="seller-email" name="seller_email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="seller-phone">Phone Number</label>
+            <input class="form-input" type="tel" id="seller-phone" name="seller_phone" placeholder="(215) 000-0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="preferred-contact">Preferred Contact Method</label>
+            <select class="form-select" id="preferred-contact" name="preferred_contact">
+              <option value="" disabled selected>Select preference</option>
+              <option>Email</option>
+              <option>Phone call</option>
+              <option>Text message</option>
+              <option>No preference</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="best-time">Best Time to Reach You</label>
+            <select class="form-select" id="best-time" name="best_time">
+              <option value="" disabled selected>Select time</option>
+              <option>Morning (8am–12pm)</option>
+              <option>Afternoon (12pm–5pm)</option>
+              <option>Evening (5pm–8pm)</option>
+              <option>Anytime</option>
+            </select>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label" for="additional-notes">Anything Else We Should Know</label>
+            <textarea class="form-textarea" id="additional-notes" name="additional_notes" placeholder="Any context that would help us understand the property or the situation…" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-section">
+        <div class="submit-row">
+          <button type="submit" class="submit-btn">Submit Property</button>
+          <p class="submit-note">We review every submission personally. You will hear from us within two business days. Your information is never shared with third parties.</p>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="success-state" id="successState">
+      <h3>Submission Received.</h3>
+      <p>Thank you for reaching out. We have received your property submission and will review it carefully. You will hear from us within two business days at the contact information you provided.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div>
+    <div class="ft-logo"><img src="brand/elo-logo-white.png" alt="Eastern Land Operations" height="26"></div>
+    <p class="ft-tag">Operators First. Philadelphia, PA.</p>
+  </div>
+  <ul class="ft-nav">
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="operations.html">Operations</a></li>
+    <li><a href="gridiron.html">Gridiron™</a></li>
+    <li><a href="portfolio.html">Portfolio Vision</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="ft-info">Eastern Land Operations<br>Philadelphia, Pennsylvania<br><br>contact@easternlandoperations.com</div>
+</footer>
+<div class="ft-bottom">
+  <p>© 2024 Eastern Land Operations. All rights reserved.</p>
+  <p>Land. Communities. Operations.</p>
+</div>
+
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50),{passive:true});
+
+  document.getElementById('sellerForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    this.style.display='none';
+    document.getElementById('successState').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+</script>
+</body>
+</html>

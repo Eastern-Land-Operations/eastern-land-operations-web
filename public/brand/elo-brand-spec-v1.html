@@ -286,40 +286,6 @@
       border-radius: 2px;
     }
 
-    .do-not-use {
-      margin-top: 40px;
-      padding: 24px 28px;
-      border-left: 3px solid var(--gunmetal);
-      background: #ECEAE6;
-    }
-
-    .do-not-label {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--matte-black);
-      margin-bottom: 12px;
-    }
-
-    .do-not-list {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 24px;
-    }
-
-    .do-not-list li {
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--slate);
-    }
-
-    .do-not-list li::before {
-      content: "—  ";
-      color: var(--gunmetal);
-    }
 
     /* ─── Typography ─────────────────────────────────────────────── */
     .type-specimen {
@@ -782,8 +748,87 @@
 
     /* ─── Print ──────────────────────────────────────────────────── */
     @media print {
-      .cover { min-height: auto; page-break-after: always; }
-      section { page-break-inside: avoid; }
+      /* Page setup */
+      @page { margin: 0; size: letter; }
+
+      html, body { background: var(--off-white) !important; }
+
+      /* Cover gets its own page */
+      .cover {
+        min-height: 0;
+        height: 100vh;
+        page-break-after: always;
+        break-after: page;
+      }
+
+      /* Every section starts on a fresh page */
+      .page > section {
+        page-break-before: always;
+        break-before: page;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      /* Section headings stay with their content */
+      .section-num,
+      .section-title,
+      .section-rule {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      /* ── Block-level elements that must not split ── */
+      .color-grid,
+      .color-card,
+      .accent-card,
+      .type-specimen,
+      .type-hierarchy,
+      .type-weights,
+      .layout-grid,
+      .layout-principle,
+      .layout-comp,
+      .layout-demo,
+      .logo-grid,
+      .logo-cell,
+      .clearspace-diagram,
+      .min-size-row,
+      .feel-grid,
+      .feel-col,
+      .position-statement,
+      .version-block,
+      .version-inner {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      /* Grid items individually */
+      .color-card,
+      .logo-cell,
+      .layout-principle,
+      .feel-list li,
+      .type-hier-row,
+      .clearspace-rule-item,
+      .min-size-item {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      /* Keep label above grid/content */
+      .color-divider-label,
+      .logo-cell-label,
+      .layout-comp-label,
+      .demo-eyebrow,
+      .accent-label,
+      .position-label {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      /* Version block at end */
+      .version-block {
+        page-break-before: always;
+        break-before: page;
+      }
     }
 
     @media (max-width: 680px) {
@@ -878,16 +923,6 @@
         </div>
       </div>
 
-      <div class="do-not-use">
-        <div class="do-not-label">Never Use</div>
-        <ul class="do-not-list">
-          <li>Orange or warm accent colors</li>
-          <li>Bright or saturated red</li>
-          <li>Neon or electric tones</li>
-          <li>Gradients of any kind</li>
-          <li>Metallic or foil effects</li>
-        </ul>
-      </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════ 02 TYPOGRAPHY -->
@@ -1117,6 +1152,89 @@
         <div class="position-label">Brand Position Statement</div>
         <div class="position-text">"Strategic land operator<br>with institutional discipline."</div>
       </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ 06 EASTERN LANDMEN MARK -->
+    <section>
+      <span class="section-num">06 — Eastern Landmen Mark</span>
+      <h2 class="section-title">The field mark.<br>Ironhound insignia.</h2>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-bottom:40px;">
+
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="font-family:var(--font-body); font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--slate); padding:12px 20px; border:1px solid #D5D4D0; border-bottom:none; background:#ECEAE6;">Primary Mark — Light Surface</div>
+          <div style="border:1px solid #D5D4D0; display:flex; align-items:center; justify-content:center; padding:40px; background:var(--off-white);">
+            <img src="../eastern landmen.png" alt="Eastern Landmen" style="width:200px; height:auto;" />
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="font-family:var(--font-body); font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--slate); padding:12px 20px; border:1px solid var(--gunmetal); border-bottom:none; background:var(--graphite);">Mark — Dark Surface Treatment</div>
+          <div style="border:1px solid var(--gunmetal); display:flex; align-items:center; justify-content:center; padding:40px; background:var(--graphite);">
+            <div style="background:var(--off-white); border-radius:2px; padding:16px; display:inline-block;">
+              <img src="../eastern landmen.png" alt="Eastern Landmen" style="width:160px; height:auto; display:block;" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mark Description -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-bottom:40px;">
+        <div>
+          <div style="font-family:var(--font-body); font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--olive); margin-bottom:12px;">Mark Identity</div>
+          <p style="font-family:var(--font-body); font-size:13px; color:var(--graphite); line-height:1.7; margin-bottom:16px;">
+            The Eastern Landmen mark is the field operations insignia of the ELO system. Engraving-style heritage badge with hound illustration — communicates craft, terrain knowledge, and tactical groundwork. Distinct energy from the ELO mountain emblem.
+          </p>
+          <p style="font-family:var(--font-body); font-size:13px; color:var(--graphite); line-height:1.7;">
+            Where the ELO mark reads institutional and infrastructural, the Eastern Landmen mark reads grounded, skilled, and field-ready. Both are operational. The distinction is posture.
+          </p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-body); font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--olive); margin-bottom:12px;">Usage Contexts</div>
+          <div style="display:flex; flex-direction:column; gap:0;">
+            <div style="font-family:var(--font-body); font-size:12px; color:var(--graphite); padding:10px 0; border-bottom:1px solid #D5D4D0; padding-left:14px; border-left:2px solid var(--olive);">Field operations materials, site documentation</div>
+            <div style="font-family:var(--font-body); font-size:12px; color:var(--graphite); padding:10px 0; border-bottom:1px solid #D5D4D0; padding-left:14px; border-left:2px solid var(--olive); margin-top:2px;">Apparel — work wear, field crew gear</div>
+            <div style="font-family:var(--font-body); font-size:12px; color:var(--graphite); padding:10px 0; border-bottom:1px solid #D5D4D0; padding-left:14px; border-left:2px solid var(--olive); margin-top:2px;">Vehicle signage and field equipment</div>
+            <div style="font-family:var(--font-body); font-size:12px; color:var(--graphite); padding:10px 0; border-bottom:1px solid #D5D4D0; padding-left:14px; border-left:2px solid var(--olive); margin-top:2px;">Standalone brand when ELO mark is not appropriate</div>
+            <div style="font-family:var(--font-body); font-size:12px; color:var(--graphite); padding:10px 0; padding-left:14px; border-left:2px solid var(--olive); margin-top:2px;">Co-branding with ELO: marks never stacked — always separated</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Size Scale -->
+      <div style="background:var(--matte-black); padding:36px 48px; border-radius:2px; margin-bottom:40px;">
+        <div style="font-family:var(--font-body); font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--olive); margin-bottom:28px;">Minimum Size Reference</div>
+        <div style="display:flex; align-items:flex-end; gap:48px;">
+          <div style="text-align:center;">
+            <div style="background:var(--off-white); border-radius:2px; padding:8px; display:inline-block; margin-bottom:10px;">
+              <img src="../eastern landmen.png" alt="Eastern Landmen" style="width:120px; height:auto; display:block;" />
+            </div>
+            <div style="font-family:var(--font-body); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--slate);">120px — Full detail</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="background:var(--off-white); border-radius:2px; padding:8px; display:inline-block; margin-bottom:10px;">
+              <img src="../eastern landmen.png" alt="Eastern Landmen" style="width:80px; height:auto; display:block;" />
+            </div>
+            <div style="font-family:var(--font-body); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--slate);">80px — Digital min</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="background:var(--off-white); border-radius:2px; padding:8px; display:inline-block; margin-bottom:10px;">
+              <img src="../eastern landmen.png" alt="Eastern Landmen" style="width:48px; height:auto; display:block;" />
+            </div>
+            <div style="font-family:var(--font-body); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--slate);">48px — Absolute min</div>
+          </div>
+          <div style="margin-left:auto;">
+            <div style="font-family:var(--font-body); font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--slate); margin-bottom:10px;">On Dark Backgrounds</div>
+            <div style="font-family:var(--font-body); font-size:12px; color:var(--slate); line-height:1.6; max-width:240px;">
+              The mark carries an embedded light background. Always place on an off-white or white field when background contrast is needed. Never place directly on dark surfaces without the light field buffer.
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </section>
 
   </div>
