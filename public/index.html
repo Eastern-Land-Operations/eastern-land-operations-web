@@ -12,7 +12,7 @@
       height: 100vh; min-height: 700px;
       background: var(--ink);
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 56px 88px;
+      padding: 0 var(--page-gutter) 88px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -25,6 +25,15 @@
     .hero-eyebrow {
       font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
       color: var(--warm-gray); margin-bottom: 40px; font-weight: 400;
+    }
+    .hero-eyebrow,
+    .hero-headline,
+    .hero-rule,
+    .hero-bottom {
+      width: 100%;
+      max-width: var(--content-max);
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero-headline {
       font-family: 'Cormorant Garamond', serif;
@@ -40,10 +49,11 @@
       font-size: clamp(36px, 5vw, 76px);
     }
     .hero-rule { border: none; border-top: 1px solid rgba(244,241,236,.1); margin-bottom: 32px; }
-    .hero-bottom { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+    .hero-bottom { display: grid; grid-template-columns: minmax(320px, 560px) auto; gap: 80px; align-items: end; justify-content: space-between; }
+    .hero-bottom > * { min-width: 0; }
     .hero-desc {
       color: rgba(244,241,236,.45); font-size: 13px;
-      line-height: 1.9; font-weight: 300; max-width: 400px;
+      line-height: 1.9; font-weight: 300; max-width: 560px;
     }
     .scroll-note {
       position: absolute; bottom: 88px; right: 56px;
@@ -53,7 +63,13 @@
     }
 
     /* ── PHILOSOPHY ────────────────────────────── */
-    .philosophy { padding: 160px 56px; }
+    .philosophy { padding: 160px var(--page-gutter); }
+    .philosophy > .two-col {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      grid-template-columns: minmax(360px, 5fr) minmax(520px, 7fr);
+      gap: clamp(80px, 8vw, 140px);
+    }
     .phil-hed {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(36px, 4.5vw, 64px);
@@ -69,9 +85,11 @@
     /* ── OPERATIONS TEASER ─────────────────────── */
     .ops-section { background: var(--ink); }
     .ops-header {
-      padding: 120px 56px 80px;
+      padding: 120px var(--page-gutter) 80px;
       border-bottom: 1px solid rgba(244,241,236,.07);
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+      display: grid; grid-template-columns: minmax(420px, 1fr) minmax(420px, 560px); gap: clamp(80px, 8vw, 140px); align-items: end;
+      max-width: var(--content-max);
+      margin: 0 auto;
     }
     .ops-hed {
       font-family: 'Cormorant Garamond', serif;
@@ -79,7 +97,7 @@
       font-weight: 300; color: var(--cream);
       letter-spacing: -.02em;
     }
-    .ops-desc { font-size: 13px; line-height: 1.9; color: rgba(244,241,236,.45); font-weight: 300; }
+    .ops-desc { font-size: 14px; line-height: 1.9; color: rgba(244,241,236,.5); font-weight: 300; }
     .ops-proof-strip {
       display: grid; grid-template-columns: repeat(6, 1fr);
       border-bottom: 1px solid rgba(244,241,236,.07);
@@ -87,7 +105,7 @@
     }
     .ops-proof-item {
       min-height: 190px;
-      padding: 28px 24px;
+      padding: 32px 28px;
       border-right: 1px solid rgba(244,241,236,.07);
       display: flex; flex-direction: column;
     }
@@ -95,19 +113,21 @@
     .opi-n { font-size: 10px; color: rgba(244,241,236,.22); margin-bottom: 36px; }
     .opi-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 24px; font-weight: 300;
+      font-size: 27px; font-weight: 300;
       color: var(--cream); margin-bottom: 12px;
     }
     .opi-desc {
-      font-size: 11px; line-height: 1.7;
+      font-size: 12px; line-height: 1.75;
       color: rgba(244,241,236,.38); font-weight: 300;
     }
 
     /* ── GRIDIRON ──────────────────────────────── */
-    .gridiron-section { padding: 160px 56px; background: var(--cream); }
+    .gridiron-section { padding: 160px var(--page-gutter); background: var(--cream); }
     .g-inner {
       display: grid; grid-template-columns: 2fr 3fr;
       gap: 96px; align-items: start;
+      max-width: var(--content-max);
+      margin: 0 auto;
     }
     .g-mark {
       font-family: 'Cormorant Garamond', serif;
@@ -151,10 +171,13 @@
     .g-link { margin-top: 40px; }
 
     /* ── PORTFOLIO TEASER ──────────────────────── */
-    .port-section { background: var(--pale); padding: 160px 56px; }
+    .port-section { background: var(--pale); padding: 160px var(--page-gutter); }
     .port-header {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 80px; align-items: end; margin-bottom: 96px;
+      max-width: var(--content-max);
+      margin-left: auto;
+      margin-right: auto;
     }
     .port-hed {
       font-family: 'Cormorant Garamond', serif;
@@ -162,7 +185,7 @@
       font-weight: 300; line-height: 1.08; letter-spacing: -.025em;
     }
     .port-intro { font-size: 13px; line-height: 1.95; color: var(--mid-gray); font-weight: 300; }
-    .port-cats { display: grid; grid-template-columns: repeat(5, 1fr); }
+    .port-cats { display: grid; grid-template-columns: repeat(5, 1fr); max-width: var(--content-max); margin: 0 auto; }
     .cat-item {
       border-left: 1px solid rgba(15,17,19,.12);
       padding: 40px 28px;
@@ -180,7 +203,7 @@
 
     /* ── CLOSING ───────────────────────────────── */
     .closing {
-      background: var(--ink); padding: 200px 56px;
+      background: var(--ink); padding: 200px var(--page-gutter);
       text-align: center; position: relative; overflow: hidden;
     }
     .closing::before {
@@ -190,7 +213,7 @@
         linear-gradient(90deg, rgba(244,241,236,.018) 1px, transparent 1px);
       background-size: 120px 120px;
     }
-    .closing-inner { position: relative; z-index: 1; max-width: 840px; margin: 0 auto; }
+    .closing-inner { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
     .closing-hed {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(52px, 9vw, 120px);
@@ -207,7 +230,8 @@
 
     @media (max-width: 720px) {
       .hero { padding: 0 24px 60px; }
-      .hero-bottom { grid-template-columns: 1fr; }
+      .hero-bottom { grid-template-columns: minmax(0, 1fr); gap: 36px; max-width: 100%; }
+      .hero-desc { width: 100%; max-width: 340px; }
       .philosophy, .gridiron-section, .port-section, .closing { padding-left: 24px; padding-right: 24px; }
       .ops-header { padding: 80px 24px 48px; grid-template-columns: 1fr; }
       .ops-proof-strip { grid-template-columns: 1fr; }

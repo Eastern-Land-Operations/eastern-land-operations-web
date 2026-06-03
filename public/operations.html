@@ -7,8 +7,12 @@
   <meta name="description" content="Acquisition, development, and asset operations — the three disciplines of Eastern Land Operations.">
   <link rel="stylesheet" href="css/site.css">
   <style>
-    .ops-intro { padding: 100px 56px; background: var(--cream); }
-    .ops-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .ops-intro { padding: 110px var(--page-gutter); background: var(--cream); }
+    .ops-intro-grid {
+      display: grid; grid-template-columns: minmax(360px, 5fr) minmax(540px, 7fr);
+      gap: clamp(80px, 8vw, 140px); align-items: start;
+      max-width: var(--content-max); margin: 0 auto;
+    }
     .ops-lead {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(20px, 2.5vw, 28px);
@@ -24,10 +28,11 @@
     }
     .snapshot-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
+      max-width: var(--content-max); margin: 0 auto;
     }
     .snapshot-item {
       min-height: 220px;
-      padding: 34px 32px;
+      padding: 38px 34px;
       border-right: 1px solid rgba(244,241,236,.07);
     }
     .snapshot-item:last-child { border-right: none; }
@@ -99,10 +104,11 @@
     .dp-dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; margin-top: 6px; }
     .dp-text { font-size: 12px; color: rgba(244,241,236,.45); font-weight: 300; line-height: 1.6; }
 
-    .sequence-section { padding: 120px 56px; background: var(--pale); }
+    .sequence-section { padding: 120px var(--page-gutter); background: var(--pale); }
     .sequence-head {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: end; margin-bottom: 72px;
+      display: grid; grid-template-columns: minmax(420px, 1fr) minmax(420px, 600px);
+      gap: clamp(80px, 8vw, 140px); align-items: end; margin: 0 auto 72px;
+      max-width: var(--content-max);
     }
     .sequence-title {
       font-family: 'Cormorant Garamond', serif;
@@ -115,12 +121,14 @@
       color: var(--mid-gray); font-weight: 300;
     }
     .sequence-grid {
-      display: grid; grid-template-columns: repeat(7, 1fr);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       border: 1px solid var(--light-gray);
+      max-width: var(--content-max);
+      margin: 0 auto;
     }
     .seq-card {
       padding: 28px 22px 32px;
-      min-height: 300px;
+      min-height: 270px;
       border-right: 1px solid var(--light-gray);
       display: flex; flex-direction: column;
     }
@@ -139,7 +147,8 @@
     .proof-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 0; border: 1px solid var(--gunmetal);
-      margin-top: 72px; background: var(--ink);
+      margin: 72px auto 0; background: var(--ink);
+      max-width: var(--content-max);
     }
     .proof-item {
       padding: 28px 30px;
@@ -155,10 +164,11 @@
       color: rgba(244,241,236,.5); font-weight: 300;
     }
 
-    .asset-profile-section { padding: 100px 56px; background: var(--cream); }
+    .asset-profile-section { padding: 110px var(--page-gutter); background: var(--cream); }
     .asset-profile-grid {
-      display: grid; grid-template-columns: 1fr 2fr;
-      gap: 80px; align-items: start;
+      display: grid; grid-template-columns: minmax(320px, 1fr) minmax(680px, 2fr);
+      gap: clamp(72px, 7vw, 120px); align-items: start;
+      max-width: var(--content-max); margin: 0 auto;
     }
     .asset-profile-title {
       font-family: 'Cormorant Garamond', serif;
@@ -190,13 +200,13 @@
       color: var(--warm-gray); font-weight: 300;
     }
 
-    .criteria-section { padding: 120px 56px; background: var(--cream); }
+    .criteria-section { padding: 120px var(--page-gutter); background: var(--cream); }
     .criteria-hed {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(32px, 4vw, 56px);
       font-weight: 300; letter-spacing: -.02em; margin-bottom: 72px;
     }
-    .criteria-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .criteria-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; max-width: var(--content-max); margin: 0 auto; }
     .criteria-item {
       padding: 36px 40px;
       border-left: 1px solid var(--light-gray);
@@ -211,8 +221,8 @@
     .ci-desc { font-size: 12px; line-height: 1.75; color: var(--warm-gray); font-weight: 300; }
 
     .cta-band {
-      background: var(--pale); padding: 120px 56px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      background: var(--pale); padding: 120px var(--page-gutter);
+      display: grid; grid-template-columns: minmax(420px, 1fr) minmax(420px, 560px); gap: clamp(80px, 8vw, 140px); align-items: center;
     }
     .cta-band-hed {
       font-family: 'Cormorant Garamond', serif;
