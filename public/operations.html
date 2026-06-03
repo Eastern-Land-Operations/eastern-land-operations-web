@@ -155,6 +155,41 @@
       color: rgba(244,241,236,.5); font-weight: 300;
     }
 
+    .asset-profile-section { padding: 100px 56px; background: var(--cream); }
+    .asset-profile-grid {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 80px; align-items: start;
+    }
+    .asset-profile-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 3.8vw, 52px);
+      font-weight: 300; line-height: 1.08;
+      letter-spacing: -.02em; color: var(--ink);
+    }
+    .asset-type-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--light-gray);
+    }
+    .asset-type {
+      min-height: 180px;
+      padding: 26px 24px;
+      border-right: 1px solid var(--light-gray);
+    }
+    .asset-type:last-child { border-right: none; }
+    .asset-type-k {
+      font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--warm-gray); margin-bottom: 34px;
+    }
+    .asset-type-v {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 300;
+      color: var(--ink); margin-bottom: 12px;
+    }
+    .asset-type-d {
+      font-size: 11px; line-height: 1.7;
+      color: var(--warm-gray); font-weight: 300;
+    }
+
     .criteria-section { padding: 120px 56px; background: var(--cream); }
     .criteria-hed {
       font-family: 'Cormorant Garamond', serif;
@@ -204,10 +239,15 @@
       .proof-item { border-bottom: 1px solid var(--gunmetal); }
       .proof-item:nth-child(even) { border-right: none; }
       .proof-item:nth-last-child(-n+2) { border-bottom: none; }
+      .asset-profile-grid { grid-template-columns: 1fr; }
+      .asset-type-grid { grid-template-columns: 1fr 1fr; }
+      .asset-type { border-bottom: 1px solid var(--light-gray); }
+      .asset-type:nth-child(even) { border-right: none; }
+      .asset-type:nth-last-child(-n+2) { border-bottom: none; }
       .criteria-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 720px) {
-      .ops-intro, .sequence-section, .criteria-section, .cta-band { padding-left: 24px; padding-right: 24px; }
+      .ops-intro, .sequence-section, .asset-profile-section, .criteria-section, .cta-band { padding-left: 24px; padding-right: 24px; }
       .snapshot-grid { grid-template-columns: 1fr; }
       .snapshot-item,
       .snapshot-item:nth-child(even) {
@@ -226,6 +266,13 @@
       .proof-item { border-bottom-color: var(--gunmetal); }
       .seq-card:last-child,
       .proof-item:last-child { border-bottom: none; }
+      .asset-type-grid { grid-template-columns: 1fr; }
+      .asset-type,
+      .asset-type:nth-child(even) {
+        border-right: none;
+        border-bottom: 1px solid var(--light-gray);
+      }
+      .asset-type:last-child { border-bottom: none; }
       .criteria-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -411,6 +458,37 @@
     <div class="proof-item">
       <div class="proof-label">Own Carefully</div>
       <p class="proof-text">The reputation of the company is built after closing, not before it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="asset-profile-section">
+  <div class="asset-profile-grid">
+    <div class="fu">
+      <div class="section-label">Asset Profile</div>
+      <h2 class="asset-profile-title">The assets have to be operable.</h2>
+    </div>
+    <div class="asset-type-grid fu">
+      <div class="asset-type">
+        <div class="asset-type-k">Residential</div>
+        <div class="asset-type-v">Single-Family</div>
+        <p class="asset-type-d">Houses with clear occupancy, repair, rental, resale, or long-term stewardship paths.</p>
+      </div>
+      <div class="asset-type">
+        <div class="asset-type-k">Income</div>
+        <div class="asset-type-v">Small Multifamily</div>
+        <p class="asset-type-d">Two-to-four unit and small multifamily assets where operations, tenant quality, and cash flow can be managed directly.</p>
+      </div>
+      <div class="asset-type">
+        <div class="asset-type-k">Community</div>
+        <div class="asset-type-v">Mixed-Use</div>
+        <p class="asset-type-d">Neighborhood-serving assets where residential, retail, or service use can support durable local value.</p>
+      </div>
+      <div class="asset-type">
+        <div class="asset-type-k">Future Position</div>
+        <div class="asset-type-v">Vacant Land</div>
+        <p class="asset-type-d">Patient land positions for future development, infill, assembly, access, or long-term strategic ownership.</p>
+      </div>
     </div>
   </div>
 </section>
