@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submission Received - Eastern Land Operations</title>
+  <meta name="description" content="Your submission to Eastern Land Operations has been received.">
+  <link rel="stylesheet" href="css/site.css">
+  <style>
+    body { background: var(--ink); }
+    .success-page {
+      min-height: 100vh;
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      padding: 160px var(--page-gutter) 96px;
+      position: relative;
+      overflow: hidden;
+    }
+    .success-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(244,241,236,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244,241,236,.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .success-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--content-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(360px, 1fr) minmax(420px, 620px);
+      gap: clamp(72px, 8vw, 140px);
+      align-items: end;
+    }
+    .success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 116px);
+      font-weight: 300;
+      letter-spacing: -.03em;
+      line-height: .95;
+    }
+    .success-copy {
+      border-top: 1px solid rgba(244,241,236,.1);
+      padding-top: 32px;
+    }
+    .success-copy p {
+      font-size: 14px;
+      line-height: 1.9;
+      color: rgba(244,241,236,.52);
+      font-weight: 300;
+      margin-bottom: 36px;
+    }
+    @media (max-width: 1080px) {
+      .success-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .success-page { padding: 140px 24px 72px; }
+    }
+  </style>
+</head>
+<body>
+<nav class="site-nav scrolled" id="nav">
+  <a href="index.html" class="nav-logo" aria-label="Eastern Land Operations">
+    <img src="brand/elo-logo-white.png" alt="" height="30">
+  </a>
+  <ul class="nav-links">
+    <li><a href="philosophy.html">Philosophy</a></li>
+    <li><a href="operations.html">Operations</a></li>
+    <li><a href="gridiron.html">Gridiron&trade;</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="success-page">
+  <div class="success-inner">
+    <div>
+      <div class="section-label light">Submission Received</div>
+      <h1 class="success-title">We Received<br>Your Submission.</h1>
+    </div>
+    <div class="success-copy">
+      <p>Thank you for reaching out to Eastern Land Operations. Your submission has been sent to our team at contact@easternlandoperations.com. We review every submission personally and will respond within two business days.</p>
+      <a href="index.html" class="cta-btn">Return Home <span class="line" style="width:30px;height:1px;background:currentColor;display:inline-block;"></span></a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
